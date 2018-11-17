@@ -7,17 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using vTalkServer.gui;
 
 namespace vTalkServer
 {
-    public partial class mainForm : Form
+    public partial class MainForm : Form
     {
-        public mainForm()
+        public MainForm()
         {
             InitializeComponent();
         }
 
-        private void switchButton_Click(object sender, EventArgs e)
+        private void SwitchButton_Click(object sender, EventArgs e)
         {
             Program.StartServer();
         }

@@ -1,6 +1,6 @@
 ﻿namespace vTalkServer
 {
-    partial class mainForm
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,25 +29,34 @@
         private void InitializeComponent()
         {
             this.switchButton = new System.Windows.Forms.Button();
+            this.logger = new vTalkServer.gui.Logger();
             this.SuspendLayout();
             // 
             // switchButton
             // 
-            this.switchButton.Location = new System.Drawing.Point(13, 13);
+            this.switchButton.Location = new System.Drawing.Point(12, 12);
             this.switchButton.Name = "switchButton";
             this.switchButton.Size = new System.Drawing.Size(96, 58);
             this.switchButton.TabIndex = 0;
             this.switchButton.Text = "START";
             this.switchButton.UseVisualStyleBackColor = true;
-            this.switchButton.Click += new System.EventHandler(this.switchButton_Click);
+            this.switchButton.Click += new System.EventHandler(this.SwitchButton_Click);
             // 
-            // mainForm
+            // logger
+            // 
+            this.logger.Location = new System.Drawing.Point(12, 203);
+            this.logger.Name = "logger";
+            this.logger.Size = new System.Drawing.Size(776, 235);
+            this.logger.TabIndex = 1;
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.logger);
             this.Controls.Add(this.switchButton);
-            this.Name = "mainForm";
+            this.Name = "MainForm";
             this.Text = "vTalk Server";
             this.ResumeLayout(false);
 
@@ -56,6 +65,7 @@
         #endregion
 
         private System.Windows.Forms.Button switchButton;
+        public gui.Logger logger;
     }
 }
 

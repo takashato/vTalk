@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace vTalkServer.server
 {
-    class ServerAcceptor
+    class MainServerAcceptor
     {
         private int port;
         private bool isStarted;
         private TcpListener listener;
 
-        public ServerAcceptor(int port)
+        public MainServerAcceptor(int port)
         {
             IsStarted = false;
             Port = port;
@@ -25,6 +25,7 @@ namespace vTalkServer.server
         {
             IsStarted = true;
             listener.Start();
+            Program.mainForm.logger.WriteLine("Main Server is listening on "+Port+"...");
         }
 
         private void StartAccept()

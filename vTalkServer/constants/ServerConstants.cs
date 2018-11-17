@@ -9,5 +9,7 @@ namespace vTalkServer.constants
     class ServerConstants
     {
         public const int MAIN_PORT = 8449;
+
+        public const int MAX_LOGGER_LINES = 1000;
     }
 }
