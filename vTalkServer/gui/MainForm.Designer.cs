@@ -1,6 +1,6 @@
 ﻿namespace vTalkServer
 {
-    partial class MainForm
+    partial class mainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,13 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.switchButton = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // switchButton
+            // 
+            this.switchButton.Location = new System.Drawing.Point(13, 13);
+            this.switchButton.Name = "switchButton";
+            this.switchButton.Size = new System.Drawing.Size(96, 58);
+            this.switchButton.TabIndex = 0;
+            this.switchButton.Text = "START";
+            this.switchButton.UseVisualStyleBackColor = true;
+            this.switchButton.Click += new System.EventHandler(this.switchButton_Click);
+            // 
+            // mainForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.Controls.Add(this.switchButton);
+            this.Name = "mainForm";
+            this.Text = "vTalk Server";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Button switchButton;
     }
 }
 

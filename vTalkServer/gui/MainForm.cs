@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace vTalkServer
 {
-    public partial class MainForm : Form
+    public partial class mainForm : Form
     {
-        public MainForm()
+        public mainForm()
         {
             InitializeComponent();
+        }
+
+        private void switchButton_Click(object sender, EventArgs e)
+        {
+            Program.StartServer();
         }
     }
 }
