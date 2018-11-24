@@ -16,18 +16,14 @@ using System.Windows.Shapes;
 namespace vTalkClient
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ChatLog.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ChatLog : UserControl
     {
-        public MainWindow()
+        public ChatLog()
         {
             InitializeComponent();
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            
+            //rtbLogger.AppendText("Ahihihiih do ngoc.\nOk");
         }
     }
 }
