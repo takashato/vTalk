@@ -13,10 +13,9 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <RichTextBox IsReadOnly="True">
+        <RichTextBox Name="rtbLogger" IsReadOnly="True" Block.LineHeight="6">
             <FlowDocument>
-                <Paragraph>
-                </Paragraph>
+                <Paragraph Padding="0"/>
             </FlowDocument>
         </RichTextBox>
 
