@@ -10,29 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace vTalkClient
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LoadingScreen : Window
     {
-        LoadingScreen loadingScreenFrm;
-
-        public MainWindow()
+        public LoadingScreen()
         {
             InitializeComponent();
-            loadingScreenFrm = new LoadingScreen();
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            this.IsEnabled = false;
-            loadingScreenFrm.Owner = this;
-            loadingScreenFrm.Show();
         }
     }
 }
