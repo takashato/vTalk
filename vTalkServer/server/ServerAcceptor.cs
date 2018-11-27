@@ -23,6 +23,7 @@ namespace vTalkServer.server
 
         public void Start()
         {
+            if (IsStarted) return;
             IsStarted = true;
             listener.Start();
             Program.mainForm.logger.WriteLine("Main Server is listening on "+Port+"...");
@@ -30,13 +31,14 @@ namespace vTalkServer.server
 
         private void StartAccept()
         {
-            listener.BeginAcceptTcpClient(HandleAsyncConnection, listener);
+            listener.BeginAcceptTcpClient(AcceptConnectionAsync, listener);
         }
 
-        private void HandleAsyncConnection(IAsyncResult res)
+        private async void AcceptConnectionAsync(IAsyncResult res)
         {
             StartAccept(); // Wait accept new connection
-            TcpClient client = listener.EndAcceptTcpClient(res);
+            var client = await listener.AcceptTcpClientAsync();
+            Program.mainForm.logger.WriteLine(client.Client.RemoteEndPoint + " connected!");
         }
 
         public int Port { get => port; set => port = value; }
