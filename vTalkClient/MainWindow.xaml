@@ -14,6 +14,21 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid>
+                <GroupBox Header="Info" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="180">
+                    <Grid Width="170">
+                        <Label Content="User: " HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <Label Content="Server IP: " HorizontalAlignment="Left" Margin="0,26,0,0" VerticalAlignment="Top"/>
+                        <Label Content="Status: " HorizontalAlignment="Left" Margin="0,52,0,0" VerticalAlignment="Top"/>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+        </Grid>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
