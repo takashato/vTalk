@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace vTalkServer.server
@@ -13,6 +14,7 @@ namespace vTalkServer.server
         private int port;
         private bool isStarted;
         private TcpListener listener;
+        private CancellationTokenSource cts;
 
         public MainServerAcceptor(int port)
         {
@@ -27,18 +29,19 @@ namespace vTalkServer.server
             IsStarted = true;
             listener.Start();
             Program.mainForm.logger.WriteLine("Main Server is listening on "+Port+"...");
+            cts = new CancellationTokenSource();
+            HandleConnectionAsync(listener, cts.Token);
         }
 
-        private void StartAccept()
+        private async Task HandleConnectionAsync(TcpListener listener, CancellationToken ct)
         {
-            listener.BeginAcceptTcpClient(AcceptConnectionAsync, listener);
-        }
+            while (!ct.IsCancellationRequested)
+            {
+                //TcpClient client = await listener.AcceptTcpClientAsync();
+                TcpClient client = await listener.AcceptTcpClientAsync();
+                Program.mainForm.logger.WriteLine(client.Client.RemoteEndPoint + " Connected.");
+            }
 
-        private async void AcceptConnectionAsync(IAsyncResult res)
-        {
-            StartAccept(); // Wait accept new connection
-            var client = await listener.AcceptTcpClientAsync();
-            Program.mainForm.logger.WriteLine(client.Client.RemoteEndPoint + " connected!");
         }
 
         public int Port { get => port; set => port = value; }

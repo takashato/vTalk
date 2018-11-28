@@ -23,5 +23,21 @@ namespace vTalkClient
         {
             InitializeComponent();
         }
+
+        public ProgressBar ProgressBar
+        {
+            get
+            {
+                return loadProgressBar;
+            }
+        }
+        public Label Text
+        {
+            get
+            {
+                return loadText;
+            }
+        }
+
     }
 }

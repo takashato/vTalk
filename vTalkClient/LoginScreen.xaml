@@ -1,0 +1,20 @@
+﻿<Window x:Class="vTalkClient.LoginScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:vTalkClient"
+        mc:Ignorable="d"
+        Title="Login" Height="212.176" Width="220.595" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Label Content="Server IP:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Account:" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
+        <Label Content="Password:" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbPassword" HorizontalAlignment="Left" Height="23" Margin="77,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbAccount" HorizontalAlignment="Left" Height="23" Margin="77,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbIP" HorizontalAlignment="Left" Height="23" Margin="77,14,0,0" TextWrapping="Wrap" Text="127.0.0.1" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnLogin" Content="LOGIN" HorizontalAlignment="Left" Margin="10,94,0,0" VerticalAlignment="Top" Width="187" Height="36" Click="btnLogin_Click"/>
+        <Button x:Name="btnLanScan" Content="Scan Server IP on Lan" HorizontalAlignment="Left" Margin="10,135,0,0" VerticalAlignment="Top" Width="187"/>
+
+    </Grid>
+</Window>
