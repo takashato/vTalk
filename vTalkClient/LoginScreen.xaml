@@ -10,11 +10,13 @@
         <Label Content="Server IP:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label Content="Account:" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
         <Label Content="Password:" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbPassword" HorizontalAlignment="Left" Height="23" Margin="77,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbPassword" HorizontalAlignment="Left" Height="23" Margin="77,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="99"/>
         <TextBox x:Name="tbAccount" HorizontalAlignment="Left" Height="23" Margin="77,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="tbIP" HorizontalAlignment="Left" Height="23" Margin="77,14,0,0" TextWrapping="Wrap" Text="127.0.0.1" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="btnLogin" Content="LOGIN" HorizontalAlignment="Left" Margin="10,94,0,0" VerticalAlignment="Top" Width="187" Height="36" Click="btnLogin_Click"/>
         <Button x:Name="btnLanScan" Content="Scan Server IP on Lan" HorizontalAlignment="Left" Margin="10,135,0,0" VerticalAlignment="Top" Width="187"/>
+        <Button x:Name="btnHideShowPassword" Content="show" HorizontalAlignment="Left" Margin="176,66,0,0" VerticalAlignment="Top" Width="21" Height="22" FontSize="7" Click="btnHideShowPassword_Click"/>
+        <PasswordBox x:Name="pwbPassword" HorizontalAlignment="Left" Margin="77,66,0,0" VerticalAlignment="Top" Width="99" Height="22"/>
 
     </Grid>
 </Window>

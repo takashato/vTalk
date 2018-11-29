@@ -36,5 +36,6 @@ namespace vTalkClient
             loginScreen.Owner = this;
             loginScreen.ShowDialog();
         }
+
     }
 }

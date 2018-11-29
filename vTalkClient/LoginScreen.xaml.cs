@@ -99,5 +99,24 @@ namespace vTalkClient
             btnLogin.IsEnabled = true;
             btnLogin.Content = "LOGIN"; 
         }
+
+        private void btnHideShowPassword_Click(object sender, RoutedEventArgs e)
+        {
+            if(btnHideShowPassword.Content.ToString() == "hide")
+            {
+                btnHideShowPassword.Content = "show";
+                tbPassword.Visibility = Visibility.Hidden;
+                pwbPassword.Visibility = Visibility.Visible;
+                pwbPassword.Password = tbPassword.Text;
+                pwbPassword.Focus();
+            }
+            else
+            {
+                btnHideShowPassword.Content = "hide";
+                pwbPassword.Visibility = Visibility.Hidden;
+                tbPassword.Visibility = Visibility.Visible;
+                tbPassword.Text = pwbPassword.Password;
+            }
+        }
     }
 }
