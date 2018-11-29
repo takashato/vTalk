@@ -48,12 +48,12 @@ namespace vTalkClient
         {
             get
             {
-                return tbPassword.Password;
+                return tbPassword.Text;
             }
 
             set
             {
-                tbPassword.Password = value;
+                tbPassword.Text = value;
             }
         }
 
@@ -64,7 +64,7 @@ namespace vTalkClient
 
         private async void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-			btnLogin.IsEnabled = false;
+            btnLogin.IsEnabled = false;
             btnLogin.Content = "Connecting...";
 
             IPAddress address;
@@ -85,9 +85,8 @@ namespace vTalkClient
             Client.Instance.Address = address;
             if(await Client.Instance.Connect())
             {
-				new MainWindow().Show();
-				this.Close();
-			}
+                btnLogin.Content = "Login...";
+            }
             else
             {
                 MessageBox.Show("Can't connect to server. Please try again.", "Login");

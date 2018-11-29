@@ -21,16 +21,20 @@ namespace vTalkClient
     public partial class MainWindow : Window
     {
         private LoadingScreen loadingScreen;
+        private LoginScreen loginScreen;
 
         public MainWindow()
         {
             InitializeComponent();
             loadingScreen = new LoadingScreen();
+            loginScreen = new LoginScreen();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             loadingScreen.Owner = this;
+            loginScreen.Owner = this;
+            loginScreen.ShowDialog();
         }
     }
 }
