@@ -128,7 +128,7 @@ namespace vTalkServer.server
                 }
                 finally
                 {
-                    //client.Disconnected();
+                    client.Disconnected();
                 }
             }
         }

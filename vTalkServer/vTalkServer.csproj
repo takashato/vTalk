@@ -70,6 +70,7 @@
     <Compile Include="tools\PacketProcessor.cs" />
     <Compile Include="tools\PacketReader.cs" />
     <Compile Include="tools\PacketWriter.cs" />
+    <Compile Include="tools\RecvHeader.cs" />
     <EmbeddedResource Include="gui\Logger.resx">
       <DependentUpon>Logger.cs</DependentUpon>
     </EmbeddedResource>
