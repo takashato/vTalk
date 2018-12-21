@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using vTalkClient.tools;
 
 namespace vTalkClient
 {
@@ -65,46 +66,31 @@ namespace vTalkClient
         private async void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             btnLogin.IsEnabled = false;
-            btnLogin.Content = "Connecting...";
+            btnLogin.Content = "Đang kết nối...";
 
-            IPAddress address;
-            if(!IPAddress.TryParse(ServerIP, out address))
+            LoginStatus status = await ClientWindow.Instance.Connect(ServerIP);
+
+            if(status == LoginStatus.CantConnectToServer)
             {
-                MessageBox.Show("Server IP is not valid.", "Login");
+                MessageBox.Show("Không thể kết nối tới server. Vui lòng thử lại.", "Đăng nhập");
                 ResetLoginButton();
                 return;
             }
 
-            if(Account == "")
-            {
-                MessageBox.Show("Account can not be empty.", "Login");
-                ResetLoginButton();
-                return;
-            }
-
-            Client.Instance.Address = address;
-            if(await Client.Instance.Connect())
-            {
-                btnLogin.Content = "Login...";
-            }
-            else
-            {
-                MessageBox.Show("Can't connect to server. Please try again.", "Login");
-                ResetLoginButton();
-            }
+            btnLogin.Content = "Đang đăng nhập...";
         }
 
         private void ResetLoginButton()
         {
             btnLogin.IsEnabled = true;
-            btnLogin.Content = "LOGIN"; 
+            btnLogin.Content = "ĐĂNG NHẬP"; 
         }
 
         private void btnHideShowPassword_Click(object sender, RoutedEventArgs e)
         {
-            if(btnHideShowPassword.Content.ToString() == "hide")
+            if(btnHideShowPassword.Content.ToString() == "ẩn")
             {
-                btnHideShowPassword.Content = "show";
+                btnHideShowPassword.Content = "hiện";
                 tbPassword.Visibility = Visibility.Hidden;
                 pwbPassword.Visibility = Visibility.Visible;
                 pwbPassword.Password = tbPassword.Text;

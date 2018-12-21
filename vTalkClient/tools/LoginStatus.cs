@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace vTalkClient.tools
 {
-    public enum SendHeader : ushort
+    public enum LoginStatus
     {
+        EmptyAccount,
+        CantConnectToServer,
+        LoginFailed,
+        Connected
     }
 }

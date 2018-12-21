@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace vTalkServer.tools
+namespace vTalkClient.tools
 {
-    class PacketProcessor
+    public class PacketProcessor
     {
         /// <summary>
         /// Packet's Header Size, include Packet Length (int32) and header (int8)
