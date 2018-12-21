@@ -137,5 +137,46 @@ namespace vTalkServer.server
         {
             Dispose();
         }
+
+        public void SendData(SendHeader dataType, byte[] pData)
+        {
+            byte[] data = new byte[pData.Length + PacketProcessor.HeaderSize];
+            PacketWriter pw = new PacketWriter();
+            pw.WriteInt(pData.Length);
+            pw.WriteByte((byte)dataType);
+            Buffer.BlockCopy(pw.ToArray(), 0, data, 0, pw.Length);
+            Buffer.BlockCopy(pData, 0, data, PacketProcessor.HeaderSize, pData.Length);
+            pData = data;
+            try
+            {
+                SendPacket(pData);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("[ERROR] Gửi thất bại: {0}", ex.ToString());
+            }
+        }
+
+        public void SendPacket(byte[] final)
+        {
+            if (!disposed)
+            {
+                int offset = 0;
+
+                while (offset < final.Length)
+                {
+                    SocketError outError = SocketError.Success;
+                    int sent = socket.Send(final, offset, final.Length - offset, SocketFlags.None, out outError);
+
+                    if (sent == 0 || outError != SocketError.Success)
+                    {
+                        Disconnect();
+                        return;
+                    }
+
+                    offset += sent;
+                }
+            }
+        }
     }
 }

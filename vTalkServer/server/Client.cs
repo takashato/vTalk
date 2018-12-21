@@ -61,7 +61,8 @@ namespace vTalkServer.server
             int dataType = pr_raw.ReadByte();
             byte[] data = new byte[packetLength];
             Buffer.BlockCopy(rawData, PacketProcessor.HeaderSize, data, 0, packetLength);
-            switch ((RecvHeader)dataType)
+
+            switch ((RecvHeader)dataType) // PACKET PROCESS HERE!!!
             {
 
             }
