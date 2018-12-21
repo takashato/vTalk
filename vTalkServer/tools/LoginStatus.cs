@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace vTalkClient.tools
+namespace vTalkServer.tools
 {
     public enum LoginStatus : byte
     {

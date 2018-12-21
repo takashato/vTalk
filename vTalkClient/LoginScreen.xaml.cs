@@ -45,16 +45,17 @@ namespace vTalkClient
                 tbAccount.Text = value;
             }
         }
+
         public String Password
         {
             get
             {
-                return tbPassword.Text;
+                return pwbPassword.Password;
             }
 
             set
             {
-                tbPassword.Text = value;
+                pwbPassword.Password = value;
             }
         }
 
@@ -78,6 +79,15 @@ namespace vTalkClient
             }
 
             btnLogin.Content = "Đang đăng nhập...";
+
+            LoginStatus loginStatus = await ClientWindow.Instance.Login(Account, Password); 
+
+            if(loginStatus == LoginStatus.EmptyAccount)
+            {
+                MessageBox.Show("Tài khoản / mật khẩu không được trống.", "Đăng nhập");
+                ResetLoginButton();
+                return;
+            }
         }
 
         private void ResetLoginButton()

@@ -18,6 +18,8 @@ namespace vTalkServer.server
 
         public IPEndPoint IPEndPoint { get; set; }
 
+        public AccountInfo AccountInfo { get; set; }
+
         public Client(Socket session)
         {
             this.Connection = new ClientConnection(this, session);
@@ -64,7 +66,19 @@ namespace vTalkServer.server
 
             switch ((RecvHeader)dataType) // PACKET PROCESS HERE!!!
             {
-
+                case RecvHeader.Login:
+                    PacketReader pr = new PacketReader(data);
+                    string account = pr.ReadString();
+                    string password = pr.ReadString();
+                    Console.WriteLine("{0} gửi yêu cầu đăng nhập ({0} / {1})", account, password);
+                    // Verify here
+                    AccountInfo = new AccountInfo(account);
+                    // Reply
+                    PacketWriter pw = new PacketWriter();
+                    pw.WriteByte((byte)LoginStatus.Success);
+                    AccountInfo.Encode(pw); // Encode AccountInfo object
+                    Connection.SendData(SendHeader.LoginResult, pw.ToArray());
+                    break;
             }
         }
     }

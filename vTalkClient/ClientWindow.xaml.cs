@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using vTalkClient.account;
 using vTalkClient.tools;
 
 namespace vTalkClient
@@ -28,6 +30,8 @@ namespace vTalkClient
         private LoginScreen loginScreen;
         public ClientConnection Client { get; set; }
 
+        public AccountInfo AccountInfo { get; set; }
+
         public ClientWindow()
         {
             Instance = this;
@@ -40,6 +44,7 @@ namespace vTalkClient
         {
             loadingScreen.Owner = this;
             loginScreen.Owner = this;
+            this.Hide();
             loginScreen.ShowDialog();
         }
         
@@ -67,6 +72,33 @@ namespace vTalkClient
 
                 return LoginStatus.Connected;
             });
+        }
+
+        public Task<LoginStatus> Login(string account, string password)
+        {
+            return Task.Run(() =>
+            {
+                PacketWriter pw = new PacketWriter();
+                if("".Equals(account) || "".Equals(password))
+                {
+                    return LoginStatus.EmptyAccount;
+                }
+                pw.WriteString(account);
+                pw.WriteString(password);
+                Client.SendData(SendHeader.Login, pw.ToArray());
+                return LoginStatus.Success;
+            });
+        }
+
+        public void CloseLogin()
+        {
+            if (AccountInfo == null) return;
+            Dispatcher.Invoke(() => 
+            {
+                loginScreen.Close();
+                this.Show();
+                this.IsEnabled = true;
+            }, DispatcherPriority.Normal);
         }
     }
 }

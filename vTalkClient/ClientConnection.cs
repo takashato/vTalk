@@ -189,6 +189,16 @@ namespace vTalkClient
             Buffer.BlockCopy(packet, PacketProcessor.HeaderSize, data, 0, packetLength);
             switch ((RecvHeader)dataType)
             {
+                case RecvHeader.LoginResult:
+                    PacketReader pr = new PacketReader(data);
+                    LoginStatus status = (LoginStatus)pr.ReadByte();
+                    if(status == LoginStatus.Success)
+                    {
+                        ClientWindow.Instance.AccountInfo = new account.AccountInfo();
+                        ClientWindow.Instance.AccountInfo.Decode(pr);
+                        ClientWindow.Instance.CloseLogin();
+                    }
+                    break;
             }
         }
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace vTalkClient.tools
 {
-    class PacketReader
+    public class PacketReader
     {
         protected byte[] Buffer { get; private set; }
         public int Length { get; private set; }

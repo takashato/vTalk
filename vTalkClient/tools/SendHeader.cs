@@ -8,5 +8,6 @@ namespace vTalkClient.tools
 {
     public enum SendHeader : ushort
     {
+        Login = 0
     }
 }
