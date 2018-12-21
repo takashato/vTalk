@@ -9,9 +9,9 @@ namespace vTalkServer.tools
     class PacketProcessor
     {
         /// <summary>
-        /// Packet's Header Size
+        /// Packet's Header Size, include Packet Length (int32) and header (int8)
         /// </summary>
-        public static int HeaderSize = 2;
+        public static int HeaderSize = 5;
 
         /// <summary>
         /// Waiting state
