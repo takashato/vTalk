@@ -16,16 +16,23 @@ namespace vTalkServer.gui
         public Logger()
         {
             InitializeComponent();
+            output.Items.Add("");
         }
 
-        private void Write(String text)
+        public void Write(String text)
         {
             if (output.Items.Count >= ServerConstants.MAX_LOGGER_LINES)
             {
                 output.Items.RemoveAt(0);
             }
-            output.Items.Add(text);
-            output.SelectedIndex = output.Items.Count - 1;
+
+            if (text.Equals("\n"))
+            {
+                output.Items.Add("");
+            }
+
+            output.Items[output.Items.Count - 1] = (output.Items[output.Items.Count - 1] as String) + text;
+            output.SelectedIndex = output.Items.Count - 2;
         }
 
         public void CrossthreadWrite(String text)

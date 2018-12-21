@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -60,7 +63,13 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="server\ServerAcceptor.cs" />
+    <Compile Include="server\Client.cs" />
+    <Compile Include="server\ClientConnection.cs" />
+    <Compile Include="server\Server.cs" />
+    <Compile Include="tools\LoggerWriter.cs" />
+    <Compile Include="tools\PacketProcessor.cs" />
+    <Compile Include="tools\PacketReader.cs" />
+    <Compile Include="tools\PacketWriter.cs" />
     <EmbeddedResource Include="gui\Logger.resx">
       <DependentUpon>Logger.cs</DependentUpon>
     </EmbeddedResource>

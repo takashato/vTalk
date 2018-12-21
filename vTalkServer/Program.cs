@@ -10,9 +10,6 @@ namespace vTalkServer
 {
     static class Program
     {
-        public static MainForm mainForm;
-        private static MainServerAcceptor acceptor = new MainServerAcceptor(ServerConstants.MAIN_PORT);
-
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -21,15 +18,7 @@ namespace vTalkServer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            mainForm = new MainForm();
-            Application.Run(mainForm);
-            
-        }
-
-
-        public static void StartServer()
-        {
-            acceptor.Start();
+            Application.Run(new MainForm());
         }
     }
 }
