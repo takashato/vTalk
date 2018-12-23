@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using vTalkClient.client;
 using vTalkClient.tools;
 
 namespace vTalkClient
@@ -187,16 +188,32 @@ namespace vTalkClient
             int dataType = pr_raw.ReadByte();
             byte[] data = new byte[packetLength];
             Buffer.BlockCopy(packet, PacketProcessor.HeaderSize, data, 0, packetLength);
+            PacketReader pr;
+            PacketWriter pw;
             switch ((RecvHeader)dataType)
             {
                 case RecvHeader.LoginResult:
-                    PacketReader pr = new PacketReader(data);
+                    pr = new PacketReader(data);
                     LoginStatus status = (LoginStatus)pr.ReadByte();
                     if(status == LoginStatus.Success)
                     {
                         ClientWindow.Instance.AccountInfo = new account.AccountInfo();
                         ClientWindow.Instance.AccountInfo.Decode(pr);
                         ClientWindow.Instance.CloseLogin();
+                        ClientWindow.Instance.MainUserInfo.Update();
+                        // Request for Room list
+                        pw = new PacketWriter();
+                        SendData(SendHeader.RoomListRequest, pw.ToArray());
+                    }
+                    break;
+                case RecvHeader.RoomList:
+                    pr = new PacketReader(data);
+                    for(int i = 0; i<pr.ReadInt(); i++)
+                    {
+                        Room room = new Room();
+                        room.Decode(pr);
+                        ClientWindow.Instance.Rooms.Add(room);
+                        ClientWindow.Instance.RoomList.Update();
                     }
                     break;
             }

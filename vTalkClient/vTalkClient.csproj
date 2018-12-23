@@ -55,9 +55,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="account\AccountInfo.cs" />
-    <Compile Include="ClientConnection.cs" />
-    <Compile Include="LoadingScreen.xaml.cs">
+    <Compile Include="client\ClientConnection.cs" />
+    <Compile Include="client\Room.cs" />
+    <Compile Include="gui\LoadingScreen.xaml.cs">
       <DependentUpon>LoadingScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="gui\main\MainUserInfo.xaml.cs">
+      <DependentUpon>MainUserInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="gui\main\RoomList.xaml.cs">
+      <DependentUpon>RoomList.xaml</DependentUpon>
     </Compile>
     <Compile Include="tools\LoginStatus.cs" />
     <Compile Include="tools\PacketProcessor.cs" />
@@ -69,11 +76,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LoginScreen.xaml">
+    <Page Include="gui\LoginScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ClientWindow.xaml">
+    <Page Include="gui\main\ClientWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -84,14 +91,22 @@
     <Compile Include="ChatLog.xaml.cs">
       <DependentUpon>ChatLog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LoginScreen.xaml.cs">
+    <Compile Include="gui\LoginScreen.xaml.cs">
       <DependentUpon>LoginScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ClientWindow.xaml.cs">
+    <Compile Include="gui\main\ClientWindow.xaml.cs">
       <DependentUpon>ClientWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="LoadingScreen.xaml">
+    <Page Include="gui\LoadingScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="gui\main\MainUserInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="gui\main\RoomList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

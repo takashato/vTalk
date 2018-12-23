@@ -64,6 +64,8 @@ namespace vTalkServer.server
             byte[] data = new byte[packetLength];
             Buffer.BlockCopy(rawData, PacketProcessor.HeaderSize, data, 0, packetLength);
 
+            PacketWriter pw;
+
             switch ((RecvHeader)dataType) // PACKET PROCESS HERE!!!
             {
                 case RecvHeader.Login:
@@ -74,10 +76,20 @@ namespace vTalkServer.server
                     // Verify here
                     AccountInfo = new AccountInfo(account);
                     // Reply
-                    PacketWriter pw = new PacketWriter();
+                    pw = new PacketWriter();
                     pw.WriteByte((byte)LoginStatus.Success);
                     AccountInfo.Encode(pw); // Encode AccountInfo object
                     Connection.SendData(SendHeader.LoginResult, pw.ToArray());
+                    break;
+                case RecvHeader.RoomListRequest:
+                    if (AccountInfo == null) return; // Not logged in
+                    pw = new PacketWriter();
+                    pw.WriteInt(Server.Instance.Rooms.Count);
+                    foreach(var room in Server.Instance.Rooms)
+                    {
+                        room.Encode(pw);
+                    }
+                    Connection.SendData(SendHeader.RoomList, pw.ToArray());
                     break;
             }
         }

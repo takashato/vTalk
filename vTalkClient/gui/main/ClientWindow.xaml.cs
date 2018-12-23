@@ -16,6 +16,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using vTalkClient.account;
+using vTalkClient.client;
+using vTalkClient.gui.main;
 using vTalkClient.tools;
 
 namespace vTalkClient
@@ -28,9 +30,27 @@ namespace vTalkClient
         public static ClientWindow Instance { get; set; }
         private LoadingScreen loadingScreen;
         private LoginScreen loginScreen;
+
+        public MainUserInfo MainUserInfo {
+            get
+            {
+                return userInfo;
+            }
+        }
+
+        public RoomList RoomList
+        {
+            get
+            {
+                return roomList;
+            }
+        }
+
         public ClientConnection Client { get; set; }
 
         public AccountInfo AccountInfo { get; set; }
+
+        public List<Room> Rooms { get; set; } = new List<Room>();
 
         public ClientWindow()
         {
@@ -99,6 +119,11 @@ namespace vTalkClient
                 this.Show();
                 this.IsEnabled = true;
             }, DispatcherPriority.Normal);
+        }
+
+        public void ShowRoom()
+        {
+
         }
     }
 }

@@ -8,6 +8,7 @@ namespace vTalkClient.tools
 {
     public enum RecvHeader : ushort
     {
-        LoginResult = 0
+        LoginResult = 0,
+        RoomList = 1
     }
 }

@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="vTalkClient.gui.main.MainUserInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:vTalkClient.gui.main"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <GroupBox Header="Info" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Width="180" BorderBrush="Black">
+        <Grid Width="170">
+            <Label Content="User: " HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Label Content="Server IP: " HorizontalAlignment="Left" Margin="0,26,0,0" VerticalAlignment="Top"/>
+            <Label Content="Status: " HorizontalAlignment="Left" Margin="0,52,0,0" VerticalAlignment="Top"/>
+            <Label Content="" Name="serverIp" HorizontalAlignment="Left" Margin="62,26,0,0" VerticalAlignment="Top"/>
+            <Label Content="" Name="username" HorizontalAlignment="Left" Margin="62,0,0,0" VerticalAlignment="Top"/>
+            <Label Content="" Name="status" HorizontalAlignment="Left" Margin="62,52,0,0" VerticalAlignment="Top"/>
+        </Grid>
+    </GroupBox>
+</UserControl>

@@ -13,6 +13,8 @@ namespace vTalkServer.server
 {
     class Server
     {
+        public static Server Instance { get; set; }
+
         private TcpListener listener;
 
         public int Port { get; set; }
@@ -21,8 +23,13 @@ namespace vTalkServer.server
         public delegate void ClientConnectedHandler(Socket client);
         public event ClientConnectedHandler OnClientConnected;
 
+        public List<Client> Clients { get; set; } = new List<Client>();
+        public List<Room> Rooms { get; set; } = new List<Room>();
+
         public Server(int port)
         {
+            Instance = this;
+
             IsStarted = false;
             Port = port;
             listener = new TcpListener(IPAddress.Any, port);
@@ -61,6 +68,14 @@ namespace vTalkServer.server
             catch (Exception ex)
             {
                 Console.WriteLine(String.Format("Server Error: {0}", ex));
+            }
+        }
+
+        public void Broadcast(tools.SendHeader dataType, byte[] data)
+        {
+            foreach(var room in Rooms)
+            {
+                room.Broadcast(dataType, data);
             }
         }
     }
