@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace vTalkServer.tools
 {
-    public enum RecvHeader : byte
+    public enum ChatType : byte
     {
-        Login = 0,
-        RoomListRequest = 1,
-        CreateRoom = 2,
-        JoinRoomRequest = 3,
-        TextChat = 4
+        Message = 0,
+        User = 1
     }
 }

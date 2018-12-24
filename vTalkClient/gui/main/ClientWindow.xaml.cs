@@ -50,7 +50,7 @@ namespace vTalkClient
 
         public AccountInfo AccountInfo { get; set; }
 
-        public List<Room> Rooms { get; set; } = new List<Room>();
+        public Dictionary<int, Room> Rooms { get; set; } = new Dictionary<int, Room>();
 
         public ClientWindow()
         {
@@ -124,6 +124,26 @@ namespace vTalkClient
         public void WriteLog(string message)
         {
             eventLog.WriteLine(message);
+        }
+
+        public void Join(Room room, string pass)
+        {
+            if(room.Window != null) // Joined!
+            {
+                if (!room.Window.IsVisible)
+                {
+                    room.Window.Show();
+                    room.Window.Activate();
+                }
+            }
+            else
+            {
+                PacketWriter pw = new PacketWriter();
+                pw.WriteInt(room.RoomId);
+                pw.WriteBool(pass != null);
+                if (pass != null) pw.WriteString(pass);
+                Client.SendData(SendHeader.JoinRoomRequest, pw.ToArray());
+            }
         }
     }
 }

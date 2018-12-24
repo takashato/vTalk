@@ -8,8 +8,10 @@ namespace vTalkClient.tools
 {
     public enum SendHeader : ushort
     {
-        Login = 0,
-        RoomListRequest = 1,
-        CreateRoom = 2
+        Login = 0x0,
+        RoomListRequest = 0x1,
+        CreateRoom = 0x2,
+        JoinRoomRequest = 0x3,
+        TextChat = 0x4
     }
 }

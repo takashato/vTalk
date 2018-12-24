@@ -12,6 +12,7 @@ namespace vTalkServer.server
         public int RoomId { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
+        public string Notice { get; set; } = "Chào mừng các bạn đã tham gia phòng chat!";
 
         public List<Client> Clients { get; set; } = new List<Client>();
         
@@ -29,6 +30,15 @@ namespace vTalkServer.server
         {
             foreach(var client in Clients)
             {
+                client.Connection.SendData(dataType, data);
+            }
+        }
+
+        public void Broadcast(Client c, tools.SendHeader dataType, byte[] data)
+        {
+            foreach (var client in Clients)
+            {
+                if (client == c) continue;
                 client.Connection.SendData(dataType, data);
             }
         }

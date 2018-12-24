@@ -45,7 +45,9 @@ namespace vTalkClient.gui.main
                 foreach (var room in ClientWindow.Instance.Rooms)
                 {
                     var lvi = new ListViewItem();
-                    lvi.Content = room.Name;
+                    lvi.Tag = room.Value;
+                    lvi.MouseDoubleClick += new MouseButtonEventHandler(JoinRoom);
+                    lvi.Content = room.Value.Name;
                     Rows.Items.Add(lvi);
                 }
             });
@@ -59,6 +61,34 @@ namespace vTalkClient.gui.main
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             _CreateRoomDialog.Owner = ClientWindow.Instance;
+        }
+
+        public void JoinRoom(object sender, MouseButtonEventArgs e)
+        {
+            if (!(sender is ListViewItem)) return;
+            var lvi = sender as ListViewItem;
+            var room = lvi.Tag as Room;
+            if(room.Window != null)
+            {
+                room.Window.Show();
+                room.Window.Activate();
+                return;
+            }
+            string pass = null;
+            if (room.HasPassword)
+            {
+                PasswordDialog passwordDialog = new PasswordDialog();
+                passwordDialog.Owner = ClientWindow.Instance;
+                if(passwordDialog.ShowDialog() == true)
+                {
+                    pass = passwordDialog.Password;
+                }
+                else
+                {
+                    return;
+                }
+            }
+            ClientWindow.Instance.Join(room, pass);
         }
     }
 }

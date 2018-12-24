@@ -66,9 +66,16 @@
     <Compile Include="gui\main\MainUserInfo.xaml.cs">
       <DependentUpon>MainUserInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="gui\main\PasswordDialog.xaml.cs">
+      <DependentUpon>PasswordDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="gui\main\RoomList.xaml.cs">
       <DependentUpon>RoomList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="gui\room\RoomWindow.xaml.cs">
+      <DependentUpon>RoomWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="tools\ChatType.cs" />
     <Compile Include="tools\LoginStatus.cs" />
     <Compile Include="tools\PacketProcessor.cs" />
     <Compile Include="tools\PacketReader.cs" />
@@ -114,7 +121,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="gui\main\PasswordDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="gui\main\RoomList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="gui\room\RoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

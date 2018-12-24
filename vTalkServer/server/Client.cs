@@ -90,17 +90,17 @@ namespace vTalkServer.server
                     pw.WriteInt(Server.Instance.Rooms.Count);
                     foreach(var room in Server.Instance.Rooms)
                     {
-                        room.Encode(pw);
+                        room.Value.Encode(pw);
                     }
                     Connection.SendData(SendHeader.RoomList, pw.ToArray());
                     break;
                 case RecvHeader.CreateRoom:
                     pr = new PacketReader(data);
                     string name = pr.ReadString();
-                    string pass = "";
+                    string pass = null;
                     if (pr.ReadBool()) pass = pr.ReadString();
                     Room newRoom = new Room(Server.Instance.GenerateRoomId(), name, pass, this);
-                    Server.Instance.Rooms.Add(newRoom);
+                    Server.Instance.Rooms.Add(newRoom.RoomId, newRoom);
                     // Create Result
                     pw = new PacketWriter();
                     pw.WriteByte((byte)RoomOperation.Success);
@@ -110,6 +110,80 @@ namespace vTalkServer.server
                     pw.WriteByte((byte)RoomOperation.New);
                     newRoom.Encode(pw);
                     Server.Instance.Broadcast(SendHeader.RoomListUpdate, pw.ToArray());
+                    break;
+                case RecvHeader.JoinRoomRequest:
+                    pr = new PacketReader(data);
+                    int roomId = pr.ReadInt();
+                    bool hasPassword = pr.ReadBool();
+                    Room rRoom = null;
+                    foreach(var room in Server.Instance.Rooms)
+                    {
+                        if(room.Value.RoomId == roomId)
+                        {
+                            rRoom = room.Value;
+                            break;
+                        }
+                    }
+
+                    bool isSuccess = false;
+
+                    if(rRoom != null)
+                    {
+                        if(hasPassword == (rRoom.Password != null))
+                        {
+                            string sPass = null;
+                            if(hasPassword)
+                            {
+                                sPass = pr.ReadString();
+                            }
+
+                            if((sPass == null && rRoom.Password == null) || sPass.Equals(rRoom.Password))
+                            {
+                                isSuccess = true;
+                            }
+                        }
+                    }
+
+                    pw = new PacketWriter();
+                    pw.WriteBool(isSuccess);
+                    if (isSuccess)
+                    {
+                        pw.WriteInt(roomId);
+                        pw.WriteString(rRoom.Notice);
+                    }
+                    Connection.SendData(SendHeader.JoinRoomResult, pw.ToArray());
+
+                    if(isSuccess)
+                    {
+                        // Broadcast to Room
+                        pw = new PacketWriter();
+                        pw.WriteInt(roomId);
+                        pw.WriteByte((byte)ChatType.Message);
+                        pw.WriteString(AccountInfo.Account + " vừa tham gia phòng chat.");
+                        rRoom.Broadcast(SendHeader.RoomMessage, pw.ToArray());
+                        // Add user to this room
+                        rRoom.Clients.Add(this);
+                    }
+
+                    break;
+                case RecvHeader.TextChat:
+                    pr = new PacketReader(data);
+                    int desRoomId = pr.ReadInt();
+                    string message = pr.ReadString();
+                    if(Server.Instance.Rooms.ContainsKey(desRoomId))
+                    {
+                        Room cRoom = Server.Instance.Rooms[desRoomId];
+                        if(cRoom.Clients.Contains(this)) // Joined this room
+                        {
+                            // Broadcast chat
+                            pw = new PacketWriter();
+                            pw.WriteInt(cRoom.RoomId);
+                            pw.WriteByte((byte)ChatType.User);
+                            pw.WriteString(AccountInfo.Account);
+                            pw.WriteString(message);
+                            cRoom.Broadcast(SendHeader.RoomMessage, pw.ToArray());
+                        }
+                    }
                     break;
             }
         }

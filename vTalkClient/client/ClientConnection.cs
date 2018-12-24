@@ -209,11 +209,12 @@ namespace vTalkClient
                     break;
                 case RecvHeader.RoomList:
                     pr = new PacketReader(data);
-                    for(int i = 0; i<pr.ReadInt(); i++)
+                    int n = pr.ReadInt();
+                    for (int i = 0; i<n; i++)
                     {
                         Room room = new Room();
                         room.Decode(pr);
-                        ClientWindow.Instance.Rooms.Add(room);
+                        ClientWindow.Instance.Rooms.Add(room.RoomId, room);
                         ClientWindow.Instance.RoomList.Update();
                     }
                     break;
@@ -236,13 +237,62 @@ namespace vTalkClient
                     {
                         Room newRoom = new Room();
                         newRoom.Decode(pr);
-                        ClientWindow.Instance.Rooms.Add(newRoom);
+                        ClientWindow.Instance.Rooms.Add(newRoom.RoomId, newRoom);
                         ClientWindow.Instance.RoomList.Update();
                     }
                     break;
                 case RecvHeader.ServerMessage:
                     pr = new PacketReader(data);
                     ClientWindow.Instance.WriteLog(pr.ReadString());
+                    break;
+                case RecvHeader.JoinRoomResult:
+                    pr = new PacketReader(data);
+                    if(pr.ReadBool())
+                    {
+                        int roomId = pr.ReadInt();
+                        if(ClientWindow.Instance.Rooms.ContainsKey(roomId))
+                        {
+                            var room = ClientWindow.Instance.Rooms[roomId];
+                            ClientWindow.Instance.Dispatcher.Invoke(() =>
+                            {
+                                room.Window = new gui.room.RoomWindow(room);
+                                room.Window.NoticeText = pr.ReadString();
+                                room.Window.SetTitle("Phòng chat <" + room.Name + "> | vTalk");
+                                room.Window.Show();
+                                room.Window.Activate();
+                            });
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Bạn không thể tham gia phòng chat này. Vui lòng kiểm tra lại.", "Lỗi");
+                    }
+                    break;
+                case RecvHeader.RoomMessage:
+                    pr = new PacketReader(data);
+                    int desRoomId = pr.ReadInt();
+                    if(ClientWindow.Instance.Rooms.ContainsKey(desRoomId))
+                    {
+                        Room room = ClientWindow.Instance.Rooms[desRoomId];
+                        if (room.Window != null)
+                        {
+                            switch ((ChatType)pr.ReadByte())
+                            {
+                                case ChatType.Message:
+                                    room.Window.Log.WriteLine(pr.ReadString());
+                                    break;
+                                case ChatType.User:
+                                    string user = pr.ReadString();
+                                    room.Window.Log.WriteLine("["+DateTime.Today.ToShortTimeString()+"] " + user + ": " + pr.ReadString());
+                                    room.Window.Dispatcher.Invoke(() =>
+                                    {
+                                        room.Window.tbMessage.IsEnabled = true;
+                                        room.Window.tbMessage.Text = "";
+                                    });
+                                    break;
+                            }
+                        }
+                    }
                     break;
             }
         }

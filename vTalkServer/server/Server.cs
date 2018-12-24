@@ -25,7 +25,7 @@ namespace vTalkServer.server
         public event ClientConnectedHandler OnClientConnected;
 
         public List<Client> Clients { get; set; } = new List<Client>();
-        public List<Room> Rooms { get; set; } = new List<Room>();
+        public Dictionary<int, Room> Rooms { get; set; } = new Dictionary<int, Room>();
 
         public int RoomIncId { get; set; } = 1;
 

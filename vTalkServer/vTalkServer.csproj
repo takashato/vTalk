@@ -68,6 +68,7 @@
     <Compile Include="server\ClientConnection.cs" />
     <Compile Include="server\Room.cs" />
     <Compile Include="server\Server.cs" />
+    <Compile Include="tools\ChatType.cs" />
     <Compile Include="tools\LoggerWriter.cs" />
     <Compile Include="tools\LoginStatus.cs" />
     <Compile Include="tools\PacketProcessor.cs" />
