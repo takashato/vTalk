@@ -31,7 +31,7 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="80"></RowDefinition>
             </Grid.RowDefinitions>
-            <local:ChatLog Margin="10" Width="Auto"/>
+            <local:ChatLog x:Name="eventLog" Margin="10" Width="Auto"/>
         </Grid>
     </Grid>
 </Window>

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using vTalkServer.constants;
+using vTalkServer.tools;
 
 namespace vTalkServer.server
 {
@@ -79,6 +80,13 @@ namespace vTalkServer.server
             {
                 client.Connection.SendData(dataType, data);
             }
+        }
+
+        public void SendMessage(string message)
+        {
+            PacketWriter pw = new PacketWriter();
+            pw.WriteString(message);
+            Broadcast(SendHeader.ServerMessage, pw.ToArray());
         }
 
         public int GenerateRoomId()

@@ -74,7 +74,6 @@ namespace vTalkServer.server
                     pr = new PacketReader(data);
                     string account = pr.ReadString();
                     string password = pr.ReadString();
-                    Console.WriteLine("{0} gửi yêu cầu đăng nhập ({0} / {1})", account, password);
                     // Verify here
                     AccountInfo = new AccountInfo(account);
                     // Reply
@@ -82,6 +81,8 @@ namespace vTalkServer.server
                     pw.WriteByte((byte)LoginStatus.Success);
                     AccountInfo.Encode(pw); // Encode AccountInfo object
                     Connection.SendData(SendHeader.LoginResult, pw.ToArray());
+                    Console.WriteLine("{0} đã đăng nhập ({0} / {1})", account, password);
+                    Server.Instance.SendMessage(account + " vừa đăng nhập.");
                     break;
                 case RecvHeader.RoomListRequest:
                     if (AccountInfo == null) return; // Not logged in

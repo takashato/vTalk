@@ -240,6 +240,10 @@ namespace vTalkClient
                         ClientWindow.Instance.RoomList.Update();
                     }
                     break;
+                case RecvHeader.ServerMessage:
+                    pr = new PacketReader(data);
+                    ClientWindow.Instance.WriteLog(pr.ReadString());
+                    break;
             }
         }
     }

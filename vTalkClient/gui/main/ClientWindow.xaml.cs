@@ -121,9 +121,9 @@ namespace vTalkClient
             }, DispatcherPriority.Normal);
         }
 
-        public void ShowRoom()
+        public void WriteLog(string message)
         {
-
+            eventLog.WriteLine(message);
         }
     }
 }

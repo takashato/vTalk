@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace vTalkServer.tools
 {
-    public enum RecvHeader : ushort
+    public enum RecvHeader : byte
     {
         Login = 0,
         RoomListRequest = 1,

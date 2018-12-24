@@ -23,7 +23,11 @@ namespace vTalkClient
         public ChatLog()
         {
             InitializeComponent();
-            rtbLogger.AppendText("Line 1.\nLine2.\nLine 3");
+        }
+
+        public void WriteLine(string message)
+        {
+            Dispatcher.Invoke(() => rtbLogger.AppendText(message + Environment.NewLine));
         }
     }
 }
