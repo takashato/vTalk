@@ -26,6 +26,8 @@ namespace vTalkServer.server
         public List<Client> Clients { get; set; } = new List<Client>();
         public List<Room> Rooms { get; set; } = new List<Room>();
 
+        public int RoomIncId { get; set; } = 1;
+
         public Server(int port)
         {
             Instance = this;
@@ -73,10 +75,15 @@ namespace vTalkServer.server
 
         public void Broadcast(tools.SendHeader dataType, byte[] data)
         {
-            foreach(var room in Rooms)
+            foreach(var client in Clients) // Client in Rooms
             {
-                room.Broadcast(dataType, data);
+                client.Connection.SendData(dataType, data);
             }
+        }
+
+        public int GenerateRoomId()
+        {
+            return RoomIncId++;
         }
     }
 }
