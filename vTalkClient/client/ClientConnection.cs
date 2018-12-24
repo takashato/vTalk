@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using vTalkClient.client;
 using vTalkClient.tools;
 
@@ -213,6 +214,29 @@ namespace vTalkClient
                         Room room = new Room();
                         room.Decode(pr);
                         ClientWindow.Instance.Rooms.Add(room);
+                        ClientWindow.Instance.RoomList.Update();
+                    }
+                    break;
+                case RecvHeader.CreateRoomResult:
+                    pr = new PacketReader(data);
+                    if((RoomOperation)pr.ReadByte() == RoomOperation.Success)
+                    {
+                        MessageBox.Show("Tạo phòng thành công!", "Thông báo");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Tạo phòng thất bại!", "Thông báo");
+                    }
+                    ClientWindow.Instance.Dispatcher.Invoke(() => ClientWindow.Instance.RoomList._CreateRoomDialog.Hide());
+                    break;
+                case RecvHeader.RoomListUpdate:
+                    pr = new PacketReader(data);
+                    RoomOperation operation = (RoomOperation) pr.ReadByte();
+                    if(operation == RoomOperation.New)
+                    {
+                        Room newRoom = new Room();
+                        newRoom.Decode(pr);
+                        ClientWindow.Instance.Rooms.Add(newRoom);
                         ClientWindow.Instance.RoomList.Update();
                     }
                     break;

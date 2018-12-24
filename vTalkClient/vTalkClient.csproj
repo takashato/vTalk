@@ -60,6 +60,9 @@
     <Compile Include="gui\LoadingScreen.xaml.cs">
       <DependentUpon>LoadingScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="gui\main\CreateRoomDialog.xaml.cs">
+      <DependentUpon>CreateRoomDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="gui\main\MainUserInfo.xaml.cs">
       <DependentUpon>MainUserInfo.xaml</DependentUpon>
     </Compile>
@@ -71,6 +74,7 @@
     <Compile Include="tools\PacketReader.cs" />
     <Compile Include="tools\PacketWriter.cs" />
     <Compile Include="tools\RecvHeader.cs" />
+    <Compile Include="tools\RoomOperation.cs" />
     <Compile Include="tools\SendHeader.cs" />
     <Page Include="ChatLog.xaml">
       <SubType>Designer</SubType>
@@ -99,6 +103,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="gui\LoadingScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="gui\main\CreateRoomDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

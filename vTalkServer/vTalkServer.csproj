@@ -74,6 +74,7 @@
     <Compile Include="tools\PacketReader.cs" />
     <Compile Include="tools\PacketWriter.cs" />
     <Compile Include="tools\RecvHeader.cs" />
+    <Compile Include="tools\RoomOperation.cs" />
     <Compile Include="tools\SendHeader.cs" />
     <EmbeddedResource Include="gui\Logger.resx">
       <DependentUpon>Logger.cs</DependentUpon>

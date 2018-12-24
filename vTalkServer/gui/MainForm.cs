@@ -40,6 +40,7 @@ namespace vTalkServer
         private void ClientConnect(Socket socket)
         {
             Client client = new Client(socket);
+            Server.Instance.Clients.Add(client);
             Console.WriteLine("{0}:{1} đã kết nối!", client.IPEndPoint.Address, client.IPEndPoint.Port);
         }
     }

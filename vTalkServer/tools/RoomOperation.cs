@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace vTalkServer.tools
 {
-    public enum SendHeader : ushort
+    public enum RoomOperation : byte
     {
-        LoginResult = 0,
-        RoomList = 1,
-        CreateRoomResult = 2,
-        RoomListUpdate = 3
+        New = 0,
+        Remove = 1,
+        Update = 2,
+        Success = 3,
     }
 }

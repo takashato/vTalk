@@ -48,6 +48,7 @@ namespace vTalkServer.server
                 Program.Users.Remove(IPEndPoint.ToString());
                 ServerForm.Instance.RemoveClient(this);
                 ServerForm.Instance.UpdateUserList();*/
+                Server.Instance.Clients.Remove(this);
                 Connection.Dispose();
             }
             catch (Exception e)
@@ -65,11 +66,12 @@ namespace vTalkServer.server
             Buffer.BlockCopy(rawData, PacketProcessor.HeaderSize, data, 0, packetLength);
 
             PacketWriter pw;
+            PacketReader pr;
 
             switch ((RecvHeader)dataType) // PACKET PROCESS HERE!!!
             {
                 case RecvHeader.Login:
-                    PacketReader pr = new PacketReader(data);
+                    pr = new PacketReader(data);
                     string account = pr.ReadString();
                     string password = pr.ReadString();
                     Console.WriteLine("{0} gửi yêu cầu đăng nhập ({0} / {1})", account, password);
@@ -90,6 +92,23 @@ namespace vTalkServer.server
                         room.Encode(pw);
                     }
                     Connection.SendData(SendHeader.RoomList, pw.ToArray());
+                    break;
+                case RecvHeader.CreateRoom:
+                    pr = new PacketReader(data);
+                    string name = pr.ReadString();
+                    string pass = "";
+                    if (pr.ReadBool()) pass = pr.ReadString();
+                    Room newRoom = new Room(Server.Instance.GenerateRoomId(), name, pass, this);
+                    Server.Instance.Rooms.Add(newRoom);
+                    // Create Result
+                    pw = new PacketWriter();
+                    pw.WriteByte((byte)RoomOperation.Success);
+                    Connection.SendData(SendHeader.CreateRoomResult, pw.ToArray());
+                    // Update Room!
+                    pw = new PacketWriter();
+                    pw.WriteByte((byte)RoomOperation.New);
+                    newRoom.Encode(pw);
+                    Server.Instance.Broadcast(SendHeader.RoomListUpdate, pw.ToArray());
                     break;
             }
         }
