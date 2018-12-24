@@ -283,7 +283,7 @@ namespace vTalkClient
                                     break;
                                 case ChatType.User:
                                     string user = pr.ReadString();
-                                    room.Window.Log.WriteLine("["+DateTime.Today.ToShortTimeString()+"] " + user + ": " + pr.ReadString());
+                                    room.Window.Log.WriteLine("["+DateTime.Now.ToString("H:m:s dd/MM/yyyy")+"] " + user + ": " + pr.ReadString());
                                     room.Window.Dispatcher.Invoke(() =>
                                     {
                                         room.Window.tbMessage.IsEnabled = true;
