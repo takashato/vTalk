@@ -181,7 +181,12 @@ namespace vTalkServer.server
                             pw.WriteByte((byte)ChatType.User);
                             pw.WriteString(AccountInfo.Account);
                             pw.WriteString(message);
-                            cRoom.Broadcast(SendHeader.RoomMessage, pw.ToArray());
+                            cRoom.Broadcast(this, SendHeader.RoomMessage, pw.ToArray());
+                            // Response success
+                            pw = new PacketWriter();
+                            pw.WriteInt(cRoom.RoomId);
+                            pw.WriteByte((byte)ChatType.Success);
+                            Connection.SendData(SendHeader.RoomMessage, pw.ToArray());
                         }
                     }
                     break;

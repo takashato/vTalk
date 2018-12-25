@@ -1,0 +1,26 @@
+body {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 9.5pt;
+}
+
+.message {
+	border-bottom: solid 1px #CCCCCC;
+	padding: 5px;
+}
+
+.message .info {
+
+}
+
+.message .info .user {
+	float: left;
+	color: #0077CC;
+	font-weight: bold;
+	line-height: 15px;
+}
+
+.message .info .time {
+	color: #BBBBBB;
+	font-size: 9pt;
+	line-height: 15px;
+}

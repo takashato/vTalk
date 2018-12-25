@@ -19,6 +19,7 @@ using vTalkClient.account;
 using vTalkClient.client;
 using vTalkClient.gui.main;
 using vTalkClient.tools;
+using WMPLib;
 
 namespace vTalkClient
 {
@@ -52,12 +53,16 @@ namespace vTalkClient
 
         public Dictionary<int, Room> Rooms { get; set; } = new Dictionary<int, Room>();
 
+        public WindowsMediaPlayer NotifySound { get; set; } = new WindowsMediaPlayer();
+
         public ClientWindow()
         {
             Instance = this;
             InitializeComponent();
             loadingScreen = new LoadingScreen();
             loginScreen = new LoginScreen();
+            // Sound
+            NotifySound.URL = "resource/notification.mp3";
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -144,6 +149,15 @@ namespace vTalkClient
                 if (pass != null) pw.WriteString(pass);
                 Client.SendData(SendHeader.JoinRoomRequest, pw.ToArray());
             }
+        }
+
+        public Task PlayNotificationSound()
+        {
+            return Task.Run(() =>
+            {
+                NotifySound.controls.currentPosition = 0.0D;
+                NotifySound.controls.play();
+            });
         }
     }
 }

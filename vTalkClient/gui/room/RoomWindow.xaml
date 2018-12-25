@@ -1,4 +1,4 @@
-﻿<Window x:Class="vTalkClient.gui.room.RoomWindow"
+﻿<Window xmlns:room="clr-namespace:vTalkClient.gui.room"  x:Class="vTalkClient.gui.room.RoomWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -19,13 +19,14 @@
                 <RowDefinition Height="80"></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock Name="noticeText" Text="Chào bạn đã tham gia phòng chat!" Margin="6"/>
-            <local1:ChatLog Grid.Row="1" x:Name="chatLog" Margin="2" Width="Auto"/>
+            <!-- <local1:ChatLog Grid.Row="1" x:Name="chatLog" Margin="2" Width="Auto"/> -->
+            <room:ChatBox Grid.Row="1" x:Name="chatBox" Margin="2"/>
             <Grid Grid.Row="2" Margin="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="100"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBox Name="tbMessage" Margin="0, 10, 0, 10" KeyDown="tbMessage_KeyDown"/>
+                <TextBox Name="tbMessage" Margin="0,10" KeyDown="tbMessage_KeyDown"/>
                 <Button Name="btnSend"  Grid.Column="1" Content="GỬI" Margin="10" Click="btnSend_Click"/>
             </Grid>
         </Grid>

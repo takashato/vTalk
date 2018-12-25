@@ -9,6 +9,7 @@ namespace vTalkServer.tools
     public enum ChatType : byte
     {
         Message = 0,
-        User = 1
+        User = 1,
+        Success = 2
     }
 }

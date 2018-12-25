@@ -279,11 +279,14 @@ namespace vTalkClient
                             switch ((ChatType)pr.ReadByte())
                             {
                                 case ChatType.Message:
-                                    room.Window.Log.WriteLine(pr.ReadString());
+                                    room.Window.Log.WriteUserMessage("", "", pr.ReadString());
                                     break;
                                 case ChatType.User:
                                     string user = pr.ReadString();
-                                    room.Window.Log.WriteLine("["+DateTime.Now.ToString("H:m:s dd/MM/yyyy")+"] " + user + ": " + pr.ReadString());
+                                    room.Window.Log.WriteUserMessage(user, DateTime.Now.ToString("H:m:s dd/MM/yyyy"), pr.ReadString());
+                                    ClientWindow.Instance.PlayNotificationSound();
+                                    break;
+                                case ChatType.Success:
                                     room.Window.Dispatcher.Invoke(() =>
                                     {
                                         room.Window.tbMessage.IsEnabled = true;
