@@ -185,6 +185,8 @@
     <Content Include="resource\notification.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="resource\send.png" />
+    <Resource Include="resource\photo.png" />
     <Content Include="resource\template.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
