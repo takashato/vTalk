@@ -92,6 +92,11 @@ namespace vTalkClient
                 ResetLoginButton();
                 return;
             }
+            else
+            {
+                this.Close();
+                ClientWindow.Instance.Show();
+            }
         }
 
         private void ResetLoginButton()
@@ -111,6 +116,7 @@ namespace vTalkClient
             }
             else
             {
+                btnHideShowPassword.Content = "ẩn";
                 pwbPassword.Visibility = Visibility.Hidden;
                 tbPassword.Visibility = Visibility.Visible;
                 tbPassword.Text = pwbPassword.Password;

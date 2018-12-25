@@ -111,6 +111,14 @@ namespace vTalkClient
                 pw.WriteString(account);
                 pw.WriteString(password);
                 Client.SendData(SendHeader.Login, pw.ToArray());
+
+                Dispatcher.InvokeAsync(() =>
+                {
+                   this.userInfo.serverIp.Content = loginScreen.ServerIP;
+                   this.userInfo.username.Content = loginScreen.Account;
+                   this.userInfo.status.Content = "Activated";
+                });
+
                 return LoginStatus.Success;
             });
         }

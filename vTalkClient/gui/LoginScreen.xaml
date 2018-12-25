@@ -16,8 +16,8 @@
             <RowDefinition Height="10*" />
             <RowDefinition Height="10*" />
             <RowDefinition Height="10*" />
-            <RowDefinition Height="13*" />
-            <RowDefinition Height="13*" />
+            <RowDefinition Height="12*" />
+            <RowDefinition Height="12*" />
         </Grid.RowDefinitions>
         
         <!-- Row 0 -->
@@ -45,10 +45,10 @@
         </Grid>        
 
         <!-- Row 3 -->
-        <Button Name="btnLogin" Grid.Row="3" Grid.ColumnSpan="2" Margin="7 5 10 5" Content="ĐĂNG NHẬP" Padding="2" TabIndex="3" Click="btnLogin_Click" /> 
+        <Button Name="btnLogin" Grid.Row="3" Grid.ColumnSpan="2" Margin="7 5 10 2" Content="ĐĂNG NHẬP" Padding="2" TabIndex="3" Click="btnLogin_Click" /> 
         
         <!-- Row 4 -->
-        <Button Name="btnLanScan" Grid.Row="4" Grid.ColumnSpan="2" Margin="7 0 10 10" Padding="2" Content="Tìm Server trong LAN" TabIndex="4" />
+        <Button Name="btnLanScan" Grid.Row="4" Grid.ColumnSpan="2" Margin="7 5 10 2" Padding="2" Content="Tìm Server trong LAN" TabIndex="4" />
         
     </Grid>
 </Window>
