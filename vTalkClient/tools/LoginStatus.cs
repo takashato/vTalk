@@ -8,11 +8,11 @@ namespace vTalkClient.tools
 {
     public enum LoginStatus : byte
     {
-        EmptyAccount,
-        CantConnectToServer,
-        LoginFailed = 1,
-        Connected,
-        AlreadyLoggedin = 2,
-        Success = 0
-    }
+		Success,
+		LoginFailed,
+		AlreadyLoggedin,
+		EmptyAccount,
+		CantConnectToServer,
+		Connected,
+	}
 }
