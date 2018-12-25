@@ -4,19 +4,51 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:vTalkClient"
-        mc:Ignorable="d"
-        Title="Đăng nhập" Height="212.176" Width="220.595" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
-    <Grid>
-        <Label Content="Server IP:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Label Content="Tài khoản:" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
-        <Label Content="Mật khẩu:" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbPassword" HorizontalAlignment="Left" Height="23" Margin="77,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="99"/>
-        <TextBox x:Name="tbAccount" HorizontalAlignment="Left" Height="23" Margin="77,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="1"/>
-        <TextBox x:Name="tbIP" HorizontalAlignment="Left" Height="23" Margin="77,14,0,0" TextWrapping="Wrap" Text="127.0.0.1" VerticalAlignment="Top" Width="120" TabIndex="0"/>
-        <Button x:Name="btnLogin" Content="ĐĂNG NHẬP" HorizontalAlignment="Left" Margin="10,94,0,0" VerticalAlignment="Top" Width="187" Height="36" Click="btnLogin_Click" TabIndex="3"/>
-        <Button x:Name="btnLanScan" Content="Tìm Server trên mạng LAN" HorizontalAlignment="Left" Margin="10,135,0,0" VerticalAlignment="Top" Width="187" TabIndex="4"/>
-        <Button x:Name="btnHideShowPassword" Content="hiện" HorizontalAlignment="Left" Margin="176,66,0,0" VerticalAlignment="Top" Width="21" Height="22" FontSize="7" Click="btnHideShowPassword_Click"/>
-        <PasswordBox x:Name="pwbPassword" HorizontalAlignment="Left" Margin="77,66,0,0" VerticalAlignment="Top" Width="99" Height="22" TabIndex="2"/>
+        mc:Ignorable="d" TextElement.FontSize="15"
+        Title="Đăng nhập" Height="250" Width="240" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="13*" />
+            <RowDefinition Height="13*" />
+        </Grid.RowDefinitions>
+        
+        <!-- Row 0 -->
+        <TextBlock Text="Server IP" VerticalAlignment="Center" Margin="7 0 0 0" />
+        <TextBox Name="tbIP" Grid.Column="1" Padding="2" Text="127.0.0.1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="10 0" TabIndex="0" />
+        
+        <!-- Row 1 -->
+        <TextBlock Grid.Row="1" Text="Tài khoản" VerticalAlignment="Center" Margin="7 0 0 0" />
+        <TextBox Name="tbAccount" Grid.Row="1" Grid.Column="1" Padding="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="10 0" TabIndex="1" />
 
+        <!-- Row 2 -->
+        <TextBlock Grid.Row="2" Text="Mật khẩu" VerticalAlignment="Center" Margin="7 0 0 0" />  
+        
+        <Grid Grid.Row="2" Grid.Column="1" Margin="10 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="30" />
+            </Grid.ColumnDefinitions>
+            
+            <PasswordBox Name="pwbPassword" Padding="2" Margin="0 0 5 0" MinWidth="80" TabIndex="2" VerticalAlignment="Center" />            
+            <TextBox x:Name="tbPassword" Padding="2" Margin="0 0 5 0" MinWidth="80" TabIndex="2" VerticalAlignment="Center" Visibility="Hidden" />
+            
+            <Button Name="btnHideShowPassword" Grid.Column="1" Content="hiện" FontSize="10" Padding="2" Height="{Binding ElementName=pwbPassword, Path=ActualHeight}" Click="btnHideShowPassword_Click" />
+            
+        </Grid>        
+
+        <!-- Row 3 -->
+        <Button Name="btnLogin" Grid.Row="3" Grid.ColumnSpan="2" Margin="7 5 10 5" Content="ĐĂNG NHẬP" Padding="2" TabIndex="3" Click="btnLogin_Click" /> 
+        
+        <!-- Row 4 -->
+        <Button Name="btnLanScan" Grid.Row="4" Grid.ColumnSpan="2" Margin="7 0 10 10" Padding="2" Content="Tìm Server trong LAN" TabIndex="4" />
+        
     </Grid>
 </Window>

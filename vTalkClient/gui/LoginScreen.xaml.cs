@@ -50,12 +50,16 @@ namespace vTalkClient
         {
             get
             {
-                return pwbPassword.Password;
+                // Nếu password đang ở chế độ hiện textbox
+                if (btnHideShowPassword.Content.ToString() == "ẩn")
+                    return tbPassword.Text;
+                else
+                    return pwbPassword.Password;
             }
 
             set
             {
-                pwbPassword.Password = value;
+                pwbPassword.Password = tbPassword.Text = value;
             }
         }
 
@@ -104,11 +108,9 @@ namespace vTalkClient
                 tbPassword.Visibility = Visibility.Hidden;
                 pwbPassword.Visibility = Visibility.Visible;
                 pwbPassword.Password = tbPassword.Text;
-                pwbPassword.Focus();
             }
             else
             {
-                btnHideShowPassword.Content = "hide";
                 pwbPassword.Visibility = Visibility.Hidden;
                 tbPassword.Visibility = Visibility.Visible;
                 tbPassword.Text = pwbPassword.Password;
