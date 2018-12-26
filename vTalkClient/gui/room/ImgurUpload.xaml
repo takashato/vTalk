@@ -1,0 +1,17 @@
+﻿<Window x:Class="vTalkClient.gui.room.ImgurUpload"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:vTalkClient.gui.room"
+        mc:Ignorable="d"
+        Title="Upload ảnh" Height="133.853" Width="304.108" WindowStyle="ToolWindow" WindowStartupLocation="CenterOwner">
+    <Grid>
+        <TextBox x:Name="tbPath" HorizontalAlignment="Left" Height="23" Margin="79,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <Label Content="Chọn ảnh:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnBrowse" Content="Duyệt" HorizontalAlignment="Left" Margin="204,13,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="Button_Click"/>
+        <Button x:Name="btnUpload" Content="Upload" HorizontalAlignment="Left" Margin="98,42,0,0" VerticalAlignment="Top" Width="75" Click="btnUpload_Click"/>
+        <Label x:Name="lbStatus" Content="Chọn file ảnh và click upload." HorizontalAlignment="Left" Margin="10,63,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

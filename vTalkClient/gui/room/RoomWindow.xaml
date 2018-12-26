@@ -33,7 +33,7 @@
                             <ImageBrush/>
                         </Button.BorderBrush>
                     </Button>
-                    <Image HorizontalAlignment="Left" Height="25" Margin="71,10,-21,-10" VerticalAlignment="Top" Width="25" Source="/vTalkClient;component/resource/photo.png"/>
+                    <Image HorizontalAlignment="Left" Height="25" Margin="71,10,-21,-10" VerticalAlignment="Top" Width="25" Source="/vTalkClient;component/resource/photo.png" MouseLeftButtonUp="Image_MouseLeftButtonUp"/>
                 </Grid>
             </Grid>
         </Grid>

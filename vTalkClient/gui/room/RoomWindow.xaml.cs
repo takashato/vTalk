@@ -91,5 +91,17 @@ namespace vTalkClient.gui.room
                 btnSend_Click(sender, new RoutedEventArgs());
             }
         }
+
+        public void SetTextBox(string s)
+        {
+            tbMessage.Text = s;
+        }
+
+        private void Image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            ImgurUpload imgurUpload = new ImgurUpload();
+            imgurUpload.Owner = this;
+            imgurUpload.Show();
+        }
     }
 }
