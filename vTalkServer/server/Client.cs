@@ -45,10 +45,6 @@ namespace vTalkServer.server
                 }
                 Connected = false;
 
-                /*
-                Program.Users.Remove(IPEndPoint.ToString());
-                ServerForm.Instance.RemoveClient(this);
-                ServerForm.Instance.UpdateUserList();*/
                 Server.Instance.Clients.Remove(this);
                 foreach(var pair in Server.Instance.Rooms)
                 {

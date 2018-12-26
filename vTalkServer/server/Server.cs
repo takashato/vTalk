@@ -45,6 +45,9 @@ namespace vTalkServer.server
             Console.WriteLine("Main Server đang lắng nghe trên port "+Port+"...");
             IsStarted = true;
             listener.BeginAcceptSocket(OnClientConnect, null);
+            // Initialize default room
+            Room newRoom = new Room(Server.Instance.GenerateRoomId(), "<Đại sảnh>", null, null);
+            Server.Instance.Rooms.Add(newRoom.RoomId, newRoom);
         }
 
         public void OnClientConnect(IAsyncResult iar)
