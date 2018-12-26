@@ -220,11 +220,7 @@ namespace vTalkClient
                     break;
                 case RecvHeader.CreateRoomResult:
                     pr = new PacketReader(data);
-                    if((RoomOperation)pr.ReadByte() == RoomOperation.Success)
-                    {
-                        MessageBox.Show("Tạo phòng thành công!", "Thông báo");
-                    }
-                    else
+                    if((RoomOperation)pr.ReadByte() != RoomOperation.Success)
                     {
                         MessageBox.Show("Tạo phòng thất bại!", "Thông báo");
                     }
