@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using vTalkServer.constants;
+using vTalkServer.server.packet;
 using vTalkServer.tools;
 
 namespace vTalkServer.server
@@ -49,6 +50,10 @@ namespace vTalkServer.server
                 ServerForm.Instance.RemoveClient(this);
                 ServerForm.Instance.UpdateUserList();*/
                 Server.Instance.Clients.Remove(this);
+                foreach(var pair in Server.Instance.Rooms)
+                {
+                    pair.Value.RemoveIfJoined(this);
+                }
                 Connection.Dispose();
             }
             catch (Exception e)
@@ -156,15 +161,11 @@ namespace vTalkServer.server
                     if(isSuccess)
                     {
                         // Broadcast to Room
-                        pw = new PacketWriter();
-                        pw.WriteInt(roomId);
-                        pw.WriteByte((byte)ChatType.Message);
-                        pw.WriteString(AccountInfo.Account + " vừa tham gia phòng chat.");
+                        pw = RoomPacket.ServerMessage(roomId, AccountInfo.Account + " vừa tham gia phòng chat.");
                         rRoom.Broadcast(SendHeader.RoomMessage, pw.ToArray());
                         // Add user to this room
                         rRoom.Clients.Add(this);
                     }
-
                     break;
                 case RecvHeader.TextChat:
                     pr = new PacketReader(data);

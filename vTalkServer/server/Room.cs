@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using vTalkServer.server.packet;
 using vTalkServer.tools;
 
 namespace vTalkServer.server
@@ -48,6 +49,16 @@ namespace vTalkServer.server
             pw.WriteInt(RoomId);
             pw.WriteString(Name);
             pw.WriteBool(Password != null);
+        }
+
+        public void RemoveIfJoined(Client client)
+        {
+            if (Clients.Contains(client))
+            {
+                Clients.Remove(client);
+                PacketWriter pw = RoomPacket.ServerMessage(RoomId, client.AccountInfo.Account + " vừa rời khỏi phòng chat.");
+                client.Connection.SendData(SendHeader.RoomMessage, pw.ToArray());
+            }
         }
     }
 }
