@@ -81,7 +81,7 @@ namespace vTalkClient.gui.room
             pw.WriteString(tbMessage.Text);
             ClientWindow.Instance.Client.SendData(SendHeader.TextChat, pw.ToArray());
             tbMessage.IsEnabled = false;
-            Log.WriteUserMessage(ClientWindow.Instance.AccountInfo.Account, DateTime.Now.ToString("H:m:s dd/MM/yyyy"), tbMessage.Text);
+            Log.WriteUserMessage(ClientWindow.Instance.AccountInfo.Account, DateTime.Now.ToString("H:m:s dd/MM/yyyy"), MessageProcessor.Process(tbMessage.Text));
         }
 
         private void tbMessage_KeyDown(object sender, KeyEventArgs e)

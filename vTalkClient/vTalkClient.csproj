@@ -80,6 +80,7 @@
     </Compile>
     <Compile Include="tools\ChatType.cs" />
     <Compile Include="tools\LoginStatus.cs" />
+    <Compile Include="tools\MessageProcessor.cs" />
     <Compile Include="tools\PacketProcessor.cs" />
     <Compile Include="tools\PacketReader.cs" />
     <Compile Include="tools\PacketWriter.cs" />

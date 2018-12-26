@@ -279,7 +279,8 @@ namespace vTalkClient
                                     break;
                                 case ChatType.User:
                                     string user = pr.ReadString();
-                                    room.Window.Log.WriteUserMessage(user, DateTime.Now.ToString("H:m:s dd/MM/yyyy"), pr.ReadString());
+                                    string processedString = MessageProcessor.Process(pr.ReadString());
+                                    room.Window.Log.WriteUserMessage(user, DateTime.Now.ToString("H:m:s dd/MM/yyyy"), processedString);
                                     ClientWindow.Instance.PlayNotificationSound();
                                     break;
                                 case ChatType.Success:
