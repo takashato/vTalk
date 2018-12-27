@@ -14,6 +14,7 @@ namespace vTalkClient.tools
         JoinRoomRequest = 0x3,
         TextChat = 0x4,
         UserListRequest = 0x5,
-        UserListUpdateRequest = 0x6
+        UserListUpdateRequest = 0x6,
+        LeaveRoomRequest = 0x7
     }
 }

@@ -2,7 +2,40 @@
 <header>
 	<meta charset="UTF-8">
 	<title>vTalk</title>
-	<link rel="stylesheet" type="text/css" href="template.css">
+	<style>
+	body {
+		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+		font-size: 9.5pt;
+	}
+
+	.message {
+		border-bottom: solid 1px #CCCCCC;
+		padding: 5px;
+	}
+
+	.message .info {
+
+	}
+
+	.message .info .user {
+		float: left;
+		color: #0077CC;
+		font-weight: bold;
+		line-height: 15px;
+	}
+
+	.message .info .time {
+		color: #BBBBBB;
+		font-size: 9pt;
+		line-height: 15px;
+	}
+
+	.msg-img {
+	}
+
+	.msg-img img {
+	}
+	</style>
 </header>
 <body>
 	<div id="container">	
@@ -16,6 +49,54 @@
 		</div>
 		-->
 	</div>
-	<script src="chatbox.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	function newMessage(pUser, pTime, pText) {
+		var width = window.innerWidth
+			|| document.documentElement.clientWidth
+			|| document.body.clientWidth;
+
+		var height = window.innerHeight
+			|| document.documentElement.clientHeight
+			|| document.body.clientHeight;
+		
+		
+		var msg = document.createElement("div");
+		msg.className = "message";
+		if(pUser != "") {
+			var info = document.createElement("div");
+			info.className = "info";
+			var user = document.createElement("div");
+			user.className = "user";
+			user.innerText = pUser;
+			info.appendChild(user);
+			var time =  document.createElement("div");
+			time.className = "time";
+			time.innerText = pTime;
+			info.appendChild(time);
+			msg.appendChild(info);
+		}
+		var content = document.createElement("div");
+		content.className = "content";
+		content.innerHTML = pText;
+		msg.appendChild(content);
+		document.getElementById("container").appendChild(msg);
+		
+		var imgs = document.getElementsByTagName("*");
+		for(var i = 0; i<imgs.length; i++)
+		{
+			if(imgs[i].className == "msg-img") {
+				var ow = imgs[i].offsetWidth;
+				var oh = imgs[i].offsetHeight;
+				
+				if(ow > width) {
+					imgs[i].style.width = ""+(width*90/100);
+					imgs[i].style.height = "auto";
+				}
+			}
+		}
+		
+		window.scrollTo(0,document.body.scrollHeight);
+	}
+	</script>
 </body>
 </html>

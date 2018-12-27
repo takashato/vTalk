@@ -57,7 +57,14 @@ namespace vTalkServer.server
             {
                 Clients.Remove(client);
                 PacketWriter pw = RoomPacket.ServerMessage(RoomId, client.AccountInfo.Account + " vừa rời khỏi phòng chat.");
-                client.Connection.SendData(SendHeader.RoomMessage, pw.ToArray());
+                Broadcast(SendHeader.RoomMessage, pw.ToArray());
+
+                //user list update
+                pw = new PacketWriter();
+                pw.WriteByte((byte)UserOperation.Leave);
+                pw.WriteInt(RoomId);
+                pw.WriteString(client.AccountInfo.Account);
+                Server.Instance.Broadcast(SendHeader.UserListUpdate, pw.ToArray());
             }
         }
     }

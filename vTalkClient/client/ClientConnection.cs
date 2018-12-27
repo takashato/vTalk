@@ -361,6 +361,52 @@ namespace vTalkClient
                             }
                         });
                     }
+                    else if(userOperation == UserOperation.Leave)
+                    {
+                        string username = pr.ReadString();
+                        foreach (User user in usroom.Clients)
+                        {
+                            if (user.Name.Equals(username))
+                            {
+                                usroom.Clients.Remove(user);
+                                usroom.Window.userList.Dispatcher.Invoke(() =>
+                                {
+                                    foreach (object item in usroom.Window.userList.Items)
+                                    {
+                                        ListViewItem u = (ListViewItem)item; 
+                                        if (u.Content.Equals(username))
+                                        {
+                                            usroom.Window.userList.Items.Remove(item);
+                                            break;
+                                        }
+                                    }
+                                });
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                case RecvHeader.LeaveRoomResult:
+                    pr = new PacketReader(data);
+                    int roomIDToLeave = pr.ReadInt();
+                    if(pr.ReadBool()) // Leave successful
+                    {
+                        if (ClientWindow.Instance.Rooms.ContainsKey(roomIDToLeave))
+                        {
+                            if(ClientWindow.Instance.Rooms[roomIDToLeave].Window != null)
+                            {
+                                ClientWindow.Instance.Rooms[roomIDToLeave].Window.Dispatcher.Invoke(() =>
+                                {
+                                    ClientWindow.Instance.Rooms[roomIDToLeave].Window.Close();
+                                    ClientWindow.Instance.Rooms[roomIDToLeave].Window = null;
+                                });
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Không thể rời phòng chat.", "Lỗi");
+                    }
                     break;
             }
         }

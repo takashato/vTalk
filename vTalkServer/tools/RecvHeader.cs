@@ -14,6 +14,7 @@ namespace vTalkServer.tools
         JoinRoomRequest = 3,
         TextChat = 4,
         UserListRequest = 5,
-        UserListUpdateRequest = 6
+        UserListUpdateRequest = 6,
+        LeaveRoomRequest = 7
     }
 }

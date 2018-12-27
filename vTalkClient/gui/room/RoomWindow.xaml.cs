@@ -68,7 +68,9 @@ namespace vTalkClient.gui.room
             MessageBoxResult res = MessageBox.Show("Bạn có muốn thoát phòng chat không?", "Thông báo", MessageBoxButton.YesNo);
             if(res == MessageBoxResult.Yes)
             {
-
+                PacketWriter pw = new PacketWriter();
+                pw.WriteInt(Room.RoomId);
+                ClientWindow.Instance.Client.SendData(SendHeader.LeaveRoomRequest, pw.ToArray());
             }
             else
             {

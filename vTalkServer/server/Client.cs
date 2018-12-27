@@ -159,8 +159,6 @@ namespace vTalkServer.server
                         // Broadcast to Room
                         pw = RoomPacket.ServerMessage(roomId, AccountInfo.Account + " vừa tham gia phòng chat.");
                         rRoom.Broadcast(SendHeader.RoomMessage, pw.ToArray());
-                        // Add user to this room
-                        rRoom.Clients.Add(this);
 
                         //user list update
                         pw = new PacketWriter();
@@ -168,8 +166,10 @@ namespace vTalkServer.server
                         pw.WriteInt(roomId);
                         //pw.WriteLong(Server.Instance.Clients.Count);
                         pw.WriteString(this.AccountInfo.Account);
-                        Server.Instance.Broadcast(SendHeader.UserListUpdate, pw.ToArray());
+                        rRoom.Broadcast(SendHeader.UserListUpdate, pw.ToArray());
 
+                        // Add user to this room
+                        rRoom.Clients.Add(this);
                     }
                     break;
                 case RecvHeader.TextChat:
@@ -207,6 +207,22 @@ namespace vTalkServer.server
                         pw.WriteString(client.AccountInfo.Account);
                     }
                     Connection.SendData(SendHeader.UserList, pw.ToArray());
+                    break;
+                case RecvHeader.LeaveRoomRequest:
+                    pr = new PacketReader(data);
+                    int roomIDToLeave = pr.ReadInt();
+                    if (Server.Instance.Rooms.ContainsKey(roomIDToLeave))
+                    {
+                        Room cRoom = Server.Instance.Rooms[roomIDToLeave];
+                        if (cRoom.Clients.Contains(this)) // Joined this room
+                        {
+                            cRoom.RemoveIfJoined(this);
+                            pw = new PacketWriter();
+                            pw.WriteInt(roomIDToLeave);
+                            pw.WriteBool(true);
+                            Connection.SendData(SendHeader.LeaveRoomResult, pw.ToArray());
+                        }
+                    }
                     break;
                
             }

@@ -21,28 +21,55 @@ namespace vTalkClient.gui.room
     /// </summary>
     public partial class ChatBox : UserControl
     {
+        private bool isLoaded = false;
+        private Queue<string[]> messageQueue = new Queue<string[]>();
+
         public ChatBox()
         {
             InitializeComponent();
+            UseTemplate();
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            UseTemplate();
         }
 
         public void UseTemplate()
         {
-            string curDir = Directory.GetCurrentDirectory();
-            browser.Navigate(String.Format("file:///{0}/resource/template.html", curDir));
+            try
+            {
+                string template = File.ReadAllText("resource/template.html");
+                browser.NavigateToString(template);
+            } catch (Exception ex)
+            {
+                MessageBox.Show("Không tìm thấy template chat!");
+            }
         }
 
         public void WriteUserMessage(string user, string time, string text)
         {
-            Dispatcher.Invoke(() =>
+            string[] message = new string[] { user, time, text };
+            if (!isLoaded) messageQueue.Enqueue(message);
+            else
             {
-                browser.InvokeScript("newMessage", new string[] { user, time, text });
-            });
+                Dispatcher.Invoke(() =>
+                {
+                    browser.InvokeScript("newMessage", message);
+                });
+            }
+        }
+
+        private void browser_LoadCompleted(object sender, NavigationEventArgs e)
+        {
+            isLoaded = true;
+            while(messageQueue.Count>0)
+            {
+                string[] message = messageQueue.Dequeue();
+                Dispatcher.Invoke(() =>
+                {
+                    browser.InvokeScript("newMessage", message);
+                });
+            }
         }
     }
 }

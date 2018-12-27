@@ -16,6 +16,7 @@ namespace vTalkServer.tools
         JoinRoomResult = 0x4,
         RoomMessage = 0x5,
         UserList = 0x6,
-        UserListUpdate = 0x7
+        UserListUpdate = 0x7,
+        LeaveRoomResult = 0x8
     }
 }
