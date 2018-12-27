@@ -196,7 +196,7 @@ namespace vTalkClient
             else
             {
                 e.Cancel = true;
-                this.Hide();
+                //this.Hide();
             }
         }
 
