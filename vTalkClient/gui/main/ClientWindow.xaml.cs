@@ -32,6 +32,8 @@ namespace vTalkClient
         private LoadingScreen loadingScreen;
         private LoginScreen loginScreen;
 
+        private System.Windows.Forms.NotifyIcon notifyIcon;
+
         public MainUserInfo MainUserInfo {
             get
             {
@@ -59,10 +61,17 @@ namespace vTalkClient
         {
             Instance = this;
             InitializeComponent();
+            notifyIcon = new System.Windows.Forms.NotifyIcon();
+            notifyIcon.Click += new EventHandler(notifyIcon_Click);
             loadingScreen = new LoadingScreen();
             loginScreen = new LoginScreen();
             // Sound
             NotifySound.URL = "resource/notification.mp3";
+        }
+
+        private void notifyIcon_Click(object sender, EventArgs e)
+        {
+            this.Show();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -166,6 +175,20 @@ namespace vTalkClient
                 NotifySound.controls.currentPosition = 0.0D;
                 NotifySound.controls.play();
             });
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var res = MessageBox.Show("Bạn có muốn thực sự thoát không?", "Thông báo", MessageBoxButton.YesNo);
+            if(res == MessageBoxResult.Yes)
+            {
+                Environment.Exit(0);
+            }
+            else
+            {
+                e.Cancel = true;
+                this.Hide();
+            }
         }
     }
 }

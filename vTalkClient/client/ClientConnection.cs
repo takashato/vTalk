@@ -123,7 +123,8 @@ namespace vTalkClient
                     //ClientForm.Instance.EnableChat(false);
 
                     //ClientForm.Instance.UserList = new Dictionary<string, string>();
-                    Console.WriteLine("Bạn đã bị ngắt kết nối với server.");
+                    MessageBox.Show("Bạn đã bị ngắt kết nối với server.", "Thông báo");
+                    Environment.Exit(0);
                     /*try
                     {
                         Console.WriteLine(string.Format("{0}:{1} Disconnected", SClient.Host, SClient.Port));

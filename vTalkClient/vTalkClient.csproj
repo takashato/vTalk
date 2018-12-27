@@ -42,6 +42,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -197,9 +198,6 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="resource\chatbox.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Resource Include="resource\Hide.png" />
     <Content Include="resource\notification.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -207,9 +205,6 @@
     <Resource Include="resource\send.png" />
     <Resource Include="resource\photo.png" />
     <Resource Include="resource\Show.png" />
-    <Content Include="resource\template.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="resource\template.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
