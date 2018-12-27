@@ -50,13 +50,11 @@ namespace vTalkClient
         {
             get
             {
-                // Nếu password đang ở chế độ hiện textbox
-                if (btnHideShowPassword.Content.ToString() == "ẩn")
+                if (imgTogglePassword.Tag.ToString() == "Hide")
                     return tbPassword.Text;
                 else
                     return pwbPassword.Password;
             }
-
             set
             {
                 pwbPassword.Password = tbPassword.Text = value;
@@ -105,18 +103,22 @@ namespace vTalkClient
             btnLogin.Content = "ĐĂNG NHẬP"; 
         }
 
-        private void btnHideShowPassword_Click(object sender, RoutedEventArgs e)
+        private void ImgTogglePassword_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if(btnHideShowPassword.Content.ToString() == "ẩn")
+            if (imgTogglePassword.Tag.ToString() == "Hide")
             {
-                btnHideShowPassword.Content = "hiện";
+                imgTogglePassword.Tag = "Show";
+                imgTogglePassword.Source = new BitmapImage(new Uri("../resource/Show.png", UriKind.Relative));
+                tbPassword.Focus();
                 tbPassword.Visibility = Visibility.Hidden;
                 pwbPassword.Visibility = Visibility.Visible;
                 pwbPassword.Password = tbPassword.Text;
             }
             else
             {
-                btnHideShowPassword.Content = "ẩn";
+                imgTogglePassword.Tag = "Hide";
+                imgTogglePassword.Source = new BitmapImage(new Uri("../resource/Hide.png", UriKind.Relative));
+                pwbPassword.Focus();
                 pwbPassword.Visibility = Visibility.Hidden;
                 tbPassword.Visibility = Visibility.Visible;
                 tbPassword.Text = pwbPassword.Password;

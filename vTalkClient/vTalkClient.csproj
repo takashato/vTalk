@@ -200,11 +200,13 @@
     <Content Include="resource\chatbox.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="resource\Hide.png" />
     <Content Include="resource\notification.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="resource\send.png" />
     <Resource Include="resource\photo.png" />
+    <Resource Include="resource\Show.png" />
     <Content Include="resource\template.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
