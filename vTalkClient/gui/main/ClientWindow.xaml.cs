@@ -61,8 +61,16 @@ namespace vTalkClient
         {
             Instance = this;
             InitializeComponent();
+
             notifyIcon = new System.Windows.Forms.NotifyIcon();
+            notifyIcon.Icon = new System.Drawing.Icon(Properties.Resources.icon, 32, 32);
             notifyIcon.Click += new EventHandler(notifyIcon_Click);
+            notifyIcon.ContextMenu = new System.Windows.Forms.ContextMenu();
+            var menuItem1 = new System.Windows.Forms.MenuItem();
+            menuItem1.Text = "Thoát";
+            menuItem1.Click += new EventHandler(notiExit_Click);
+            notifyIcon.ContextMenu.MenuItems.Add(menuItem1);
+
             loadingScreen = new LoadingScreen();
             loginScreen = new LoginScreen();
             // Sound
@@ -139,6 +147,7 @@ namespace vTalkClient
             {
                 loginScreen.Close();
                 this.Show();
+                notifyIcon.Visible = true;
                 this.IsEnabled = true;
             }, DispatcherPriority.Normal);
         }
@@ -189,6 +198,12 @@ namespace vTalkClient
                 e.Cancel = true;
                 this.Hide();
             }
+        }
+
+
+        private void notiExit_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }
