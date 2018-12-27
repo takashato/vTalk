@@ -13,7 +13,7 @@ namespace vTalkClient.client
         public int RoomId { get; set; }
         public string Name { get; set; }
         public bool HasPassword { get; set; }
-
+        public List<User> Clients { get; set; } = new List<User>();
         public RoomWindow Window {get; set;}
 
         public Room()

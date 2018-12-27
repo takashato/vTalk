@@ -154,13 +154,22 @@ namespace vTalkServer.server
                     }
                     Connection.SendData(SendHeader.JoinRoomResult, pw.ToArray());
 
-                    if(isSuccess)
+                    if (isSuccess)
                     {
                         // Broadcast to Room
                         pw = RoomPacket.ServerMessage(roomId, AccountInfo.Account + " vừa tham gia phòng chat.");
                         rRoom.Broadcast(SendHeader.RoomMessage, pw.ToArray());
                         // Add user to this room
                         rRoom.Clients.Add(this);
+
+                        //user list update
+                        pw = new PacketWriter();
+                        pw.WriteByte((byte)UserOperation.New);
+                        pw.WriteInt(roomId);
+                        //pw.WriteLong(Server.Instance.Clients.Count);
+                        pw.WriteString(this.AccountInfo.Account);
+                        Server.Instance.Broadcast(SendHeader.UserListUpdate, pw.ToArray());
+
                     }
                     break;
                 case RecvHeader.TextChat:
@@ -187,6 +196,19 @@ namespace vTalkServer.server
                         }
                     }
                     break;
+                case RecvHeader.UserListRequest:
+                    pr = new PacketReader(data);
+                    int roomID = pr.ReadInt();
+                    pw = new PacketWriter();
+                    pw.WriteLong(Server.Instance.Clients.Count);
+                    pw.WriteInt(roomID);
+                    foreach (var client in Server.Instance.Clients)
+                    {
+                        pw.WriteString(client.AccountInfo.Account);
+                    }
+                    Connection.SendData(SendHeader.UserList, pw.ToArray());
+                    break;
+               
             }
         }
     }

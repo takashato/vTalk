@@ -69,6 +69,7 @@
     <Compile Include="server\packet\RoomPacket.cs" />
     <Compile Include="server\Room.cs" />
     <Compile Include="server\Server.cs" />
+    <Compile Include="tools\UserOperation.cs" />
     <Compile Include="tools\ChatType.cs" />
     <Compile Include="tools\LoggerWriter.cs" />
     <Compile Include="tools\LoginStatus.cs" />

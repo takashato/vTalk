@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using vTalkClient.client;
 using vTalkClient.tools;
 
@@ -258,6 +259,10 @@ namespace vTalkClient
                                 room.Window.Activate();
                             });
                         }
+                        // Request for User list
+                        pw = new PacketWriter();
+                        pw.WriteInt(roomId);
+                        SendData(SendHeader.UserListRequest, pw.ToArray());
                     }
                     else
                     {
@@ -292,6 +297,69 @@ namespace vTalkClient
                                     break;
                             }
                         }
+                    }
+                    break;
+                case RecvHeader.UserList:
+                    pr = new PacketReader(data);
+                    long m = pr.ReadLong();
+                    int roomID = pr.ReadInt();
+                    Room uroom = ClientWindow.Instance.Rooms[roomID];
+                    for (int i = 0; i < m; i++)
+                    {
+                        User usr = new User();
+                        usr.Name = pr.ReadString();
+                        int check = 0;
+                        foreach (User user in uroom.Clients)
+                        {
+                            if (user.Name == usr.Name)
+                                check = 1;
+                        }
+                        if (check == 0)
+                            uroom.Clients.Add(usr);
+                        uroom.Window.Dispatcher.Invoke(() =>
+                        {
+                            uroom.Window.userList.Items.Clear();
+                            foreach (User client in uroom.Clients)
+                            {
+                                ListViewItem lvi = new ListViewItem
+                                {
+                                    Content = client.Name
+                                };
+                                uroom.Window.userList.Items.Add(lvi);
+                            }
+                        });
+                    }
+                    break;
+                case RecvHeader.UserListUpdate:
+                    pr = new PacketReader(data);
+                    UserOperation userOperation = (UserOperation)pr.ReadByte();
+                    int usroomId = pr.ReadInt();
+                    //long o = pr.ReadLong();
+                    Room usroom = ClientWindow.Instance.Rooms[usroomId];
+                    if (userOperation == UserOperation.New)
+                    {
+                        User usr = new User();
+                        usr.Name = pr.ReadString();
+                        int check = 0;
+                        foreach(User user in usroom.Clients)
+                        {
+                            if (user.Name == usr.Name)
+                                check = 1;
+                        }
+                        if (check == 0)
+                            usroom.Clients.Add(usr);
+                        usroom.Window.Dispatcher.Invoke(() =>
+                        {
+                            usroom.Window.userList.Items.Clear();
+                            foreach (User client in usroom.Clients)
+                            {
+                                ListViewItem lvi = new ListViewItem
+                                {
+                                    Content = client.Name
+                                };
+                                usroom.Window.userList.Items.Add(lvi);
+                            }
+                        });
                     }
                     break;
             }

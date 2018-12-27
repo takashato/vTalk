@@ -21,6 +21,7 @@ namespace vTalkClient.gui.room
     /// </summary>
     public partial class RoomWindow : Window
     {
+        public static RoomWindow Instance { get; set; }
         public string NoticeText
         {
             get
@@ -34,7 +35,15 @@ namespace vTalkClient.gui.room
             }
         }
 
-        private Room Room { get; set; }
+        private Room Room { get; set; }      
+
+        public ListView Users
+        {
+            get
+            {
+                return userList;
+            }
+        }
 
         public ChatBox Log
         {
@@ -45,7 +54,7 @@ namespace vTalkClient.gui.room
         }
 
         public RoomWindow()
-        {
+        {          
             InitializeComponent();
         }
 

@@ -62,6 +62,7 @@
     </ApplicationDefinition>
     <Compile Include="account\AccountInfo.cs" />
     <Compile Include="client\ClientConnection.cs" />
+    <Compile Include="client\User.cs" />
     <Compile Include="client\Room.cs" />
     <Compile Include="gui\LoadingScreen.xaml.cs">
       <DependentUpon>LoadingScreen.xaml</DependentUpon>
@@ -95,6 +96,7 @@
     <Compile Include="tools\PacketReader.cs" />
     <Compile Include="tools\PacketWriter.cs" />
     <Compile Include="tools\RecvHeader.cs" />
+    <Compile Include="tools\UserOperation.cs" />
     <Compile Include="tools\RoomOperation.cs" />
     <Compile Include="tools\SendHeader.cs" />
     <Page Include="ChatLog.xaml">

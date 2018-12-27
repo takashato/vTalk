@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace vTalkServer.tools
+{
+    public enum UserOperation : byte
+    {
+        New = 0,
+        Leave = 1,
+    }
+}

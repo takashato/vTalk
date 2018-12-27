@@ -13,15 +13,19 @@
             <ColumnDefinition Width="200"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="62*"/>
+                <ColumnDefinition Width="531*"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="80"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Name="noticeText" Text="Chào bạn đã tham gia phòng chat!" Margin="6"/>
+            <TextBlock Name="noticeText" Text="Chào bạn đã tham gia phòng chat!" Margin="6,6,5.6,6" Grid.ColumnSpan="2"/>
             <!-- <local1:ChatLog Grid.Row="1" x:Name="chatLog" Margin="2" Width="Auto"/> -->
-            <room:ChatBox Grid.Row="1" x:Name="chatBox" Margin="2"/>
-            <Grid Grid.Row="2" Margin="2">
+            <room:ChatBox Grid.Row="1" x:Name="chatBox" Margin="2,2,1.6,2" Grid.ColumnSpan="2"/>
+            <Grid Grid.Row="2" Margin="2,2,1.6,2" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="150"></ColumnDefinition>
@@ -37,6 +41,6 @@
                 </Grid>
             </Grid>
         </Grid>
-        <ListView Grid.Column="1" />
+        <ListView x:Name="userList" Grid.Column="1" />
     </Grid>
 </Window>
