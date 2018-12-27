@@ -11,15 +11,15 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <ListView Grid.Row="0" Name="rows" Margin="0,0,0,10">
+        <ListView Grid.Row="0" Name="rows" Margin="0,0,0,10" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.Resources>
                 <Style TargetType="GridViewColumnHeader">
-                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Setter Property="Visibility" Value="Visible" />
                 </Style>
             </ListView.Resources>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="Danh sách phòng" Width="180"/>
                 </GridView>
             </ListView.View>
         </ListView>

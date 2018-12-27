@@ -41,6 +41,12 @@
                 </Grid>
             </Grid>
         </Grid>
-        <ListView x:Name="userList" Grid.Column="1" />
+        <ListView x:Name="userList" Grid.Column="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Thành viên trong phòng" Width="200"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

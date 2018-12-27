@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="vTalkClient Loader" Height="71.114" Width="250.907" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" WindowStyle="None" Background="#E5FFFFFF" AllowsTransparency="True">
     <Grid>
-        <Label Name="loadText" Content="Loading..." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label Name="loadText" Content="Đang kết nối lại..." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <ProgressBar Name="loadProgressBar" HorizontalAlignment="Left" Height="10" Margin="10,41,0,0" VerticalAlignment="Top" Width="223" IsIndeterminate="True"/>
     </Grid>
 </Window>
