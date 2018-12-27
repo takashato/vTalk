@@ -27,8 +27,7 @@ namespace vTalkClient.gui.main
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
-            pbPassword.Password = "";
+            this.Close();
         }
 
         private void btnCreate_Click(object sender, RoutedEventArgs e)
@@ -39,32 +38,6 @@ namespace vTalkClient.gui.main
             pw.WriteBool(hasPassword);
             if (hasPassword) pw.WriteString(pbPassword.Password);
             ClientWindow.Instance.Client.SendData(SendHeader.CreateRoom, pw.ToArray());
-
-
         }
-
-        #region Process Placehoder "Tên phòng"
-        private void TbName_ProcessFocus(object sender, RoutedEventArgs e)
-        {
-            if (tbName.Text == "Tên phòng")
-            {
-                tbName.Text = "";
-            }
-            else if (tbName.Text == "")
-            {
-                tbName.Text = "Tên phòng";
-                tbName.Foreground = new BrushConverter().ConvertFrom("#666") as SolidColorBrush;
-            }
-        }
-
-        private void TbName_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (tbName.Text != "")
-            {
-                tbName.Foreground = new BrushConverter().ConvertFrom("#000") as SolidColorBrush;
-            }
-        }
-        #endregion
-
     }
 }
