@@ -188,7 +188,7 @@ namespace vTalkClient
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            var res = MessageBox.Show("Bạn có muốn thực sự thoát không?", "Thông báo", MessageBoxButton.YesNo);
+            var res = MessageBox.Show("Bạn có muốn thực sự thoát không? Nếu không ứng dụng sẽ chạy ẩn dưới hệ thống.", "Thông báo", MessageBoxButton.YesNo);
             if(res == MessageBoxResult.Yes)
             {
                 Environment.Exit(0);
@@ -196,7 +196,7 @@ namespace vTalkClient
             else
             {
                 e.Cancel = true;
-                //this.Hide();
+                this.Hide();
             }
         }
 

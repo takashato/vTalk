@@ -42,7 +42,6 @@ namespace vTalkClient.gui.room
                 browser.NavigateToString(template);
             } catch (Exception ex)
             {
-                MessageBox.Show("Không tìm thấy template chat!");
             }
         }
 

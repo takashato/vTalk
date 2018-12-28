@@ -35,6 +35,8 @@ namespace vTalkClient.gui.room
             }
         }
 
+        private bool canClose = false;
+
         private Room Room { get; set; }      
 
         public ListView Users
@@ -63,8 +65,15 @@ namespace vTalkClient.gui.room
             Room = room;
         }
 
+        public void SetLeaveRoom()
+        {
+            canClose = true;
+        }
+
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (canClose) return;
+
             MessageBoxResult res = MessageBox.Show("Bạn có muốn thoát phòng chat không?", "Thông báo", MessageBoxButton.YesNo);
             if(res == MessageBoxResult.Yes)
             {

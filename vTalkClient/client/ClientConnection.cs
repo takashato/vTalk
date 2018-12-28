@@ -398,6 +398,7 @@ namespace vTalkClient
                             {
                                 ClientWindow.Instance.Rooms[roomIDToLeave].Window.Dispatcher.Invoke(() =>
                                 {
+                                    ClientWindow.Instance.Rooms[roomIDToLeave].Window.SetLeaveRoom();
                                     ClientWindow.Instance.Rooms[roomIDToLeave].Window.Close();
                                     ClientWindow.Instance.Rooms[roomIDToLeave].Window = null;
                                 });
